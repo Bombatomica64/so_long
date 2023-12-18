@@ -6,10 +6,9 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:16:27 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:16:47 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -81,7 +80,6 @@ int	map_is_rectangular(int fd, int retval)
 	return (1);
 }
 
-
 int	map_is_closed(t_map map)
 {
 	int	i;
@@ -109,4 +107,3 @@ int	map_is_closed(t_map map)
 	}
 	return (1);
 }
-
