@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
 /*   Updated: 2023/12/18 19:16:47 by lmicheli         ###   ########.fr       */
@@ -55,6 +55,7 @@ int	wrong_letters_in_map(int fd)
 	return (1);
 }
 
+
 int	map_is_rectangular(int fd, int retval)
 {
 	t_line		line;
@@ -79,7 +80,6 @@ int	map_is_rectangular(int fd, int retval)
 		return (0);
 	return (1);
 }
-
 int	map_is_closed(t_map map)
 {
 	int	i;
