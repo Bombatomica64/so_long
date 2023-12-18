@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 18:55:14 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:11:51 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	wrong_letters_in_map(int fd)
 	return (1);
 }
 
-int	map_is_closed(int fd, int retval)
+int	map_is_rectangular(int fd, int retval)
 {
 	t_line		line;
 	t_map		map;
@@ -76,5 +76,33 @@ int	map_is_closed(int fd, int retval)
 	}
 	if (tile_count != map.width * map.height)
 		return (0);
+	return (1);
+}
+
+int	map_is_closed(t_map map)
+{
+	int	i;
+
+	i = 0;
+	while (map.map[0][i])
+	{
+		if (map.map[0][i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (map.map[map.height - 1][i])
+	{
+		if (map.map[map.height - 1][i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (map.map[i])
+	{
+		if (map.map[i][0] != '1' || map.map[i][map.width - 1] != '1')
+			return (0);
+		i++;
+	}
 	return (1);
 }

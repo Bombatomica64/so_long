@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:41:23 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 18:53:23 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:08:17 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ t_map	get_map(char *filename)
 	return (map);
 }
 
+void	ft_check_if_map_is_valid(t_map map)
+{
+	int	i;
+
+	i = map_is_closed(map);
+}
+
 int	put_map(char *filename, t_data *data)
 {
 	t_image	tile;
@@ -65,4 +72,5 @@ int	put_map(char *filename, t_data *data)
 	if (map_checker(filename) == 0)
 		ft_error_free_map(&tile, &wall, data);
 	map = get_map(filename);
+	ft_check_if_map_is_valid(map);
 }
