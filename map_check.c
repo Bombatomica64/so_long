@@ -6,19 +6,12 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2023/12/18 16:56:10 by lmicheli         ###   ########.fr       */
-=======
-/*   Updated: 2023/12/18 18:24:39 by mruggier         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/12/18 19:16:47 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-<<<<<<< Updated upstream
-int	map_checker(char *filename)
-=======
 int	map_checker(char *filename)
 {
 	int		fd;
@@ -30,9 +23,10 @@ int	map_checker(char *filename)
 	retval = wrong_letters_in_map(fd);
 	close(fd);
 	fd = open(filename, O_RDONLY);
-	retval = map_is_closed(fd, retval);
+	retval = map_is_rectangular(fd, retval);
 	if (retval == 0)
 		return (retval);
+	close(fd);
 }
 
 int	wrong_letters_in_map(int fd)
@@ -61,7 +55,8 @@ int	wrong_letters_in_map(int fd)
 	return (1);
 }
 
-int	map_is_closed(int fd, int retval)
+
+int	map_is_rectangular(int fd, int retval)
 {
 	t_line		line;
 	t_map		map;
@@ -74,7 +69,7 @@ int	map_is_closed(int fd, int retval)
 	while (line.read_bytes > 0)
 	{
 		line.line = get_next_line(fd);
-		line.read_bytes = ft_strlen(line.line);ft_flood_fill
+		line.read_bytes = ft_strlen(line.line);
 		if (map.width == 0)
 			map.width = line.read_bytes;
 		map.height++;
@@ -85,4 +80,30 @@ int	map_is_closed(int fd, int retval)
 		return (0);
 	return (1);
 }
->>>>>>> Stashed changes
+int	map_is_closed(t_map map)
+{
+	int	i;
+
+	i = 0;
+	while (map.map[0][i])
+	{
+		if (map.map[0][i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (map.map[map.height - 1][i])
+	{
+		if (map.map[map.height - 1][i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (map.map[i])
+	{
+		if (map.map[i][0] != '1' || map.map[i][map.width - 1] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
