@@ -6,7 +6,7 @@ MLXFLAGS = -lX11 -lXext -lm
 
 CC = cc -Wall -Wextra -Werror
 
-SRC = so_long.c
+SRC = so_long.c put_images.c
 
 
 #OBJ = $(SRC:.c=.o)
@@ -17,7 +17,8 @@ all: $(NAME)
 
 $(NAME):
 	@make all -C $(FT_PRINTF)
-	@$(CC) $(SRC) ft_printf/libftprintf.a -o $@
+	@make all -C $(MLX_DIR)
+	@$(CC) $(SRC) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "Compiled "$(NAME)" successfully!"
 
 #%.o: %.c \
@@ -30,6 +31,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(FT_PRINTF)
+	@make clean -C $(MLX_DIR)
 	@echo "Cleaned "$(NAME)" successfully!"
 	
 re: fclean all
@@ -37,7 +39,7 @@ re: fclean all
 
 replay:
 	@rm -f $(NAME)
-	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
-	@echo "Let's play !!"
+	@$(CC) $(SRC) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
+	@echo "Let's  gooo!!"
 
-.PHONY: all clean fclean bonus re
+.PHONY: all clean fclean bonus re replay
