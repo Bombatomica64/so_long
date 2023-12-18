@@ -18,7 +18,6 @@ int	ft_is_reachable(t_map map)
 	int y;
 
 	y = 0;
-	x = 0;
 	while (map.map[y])
 	{
 		x = 0;
@@ -34,8 +33,9 @@ int	ft_is_reachable(t_map map)
 		}
 		y++;
 	}
-	if (map.nb_e == 1 && map.nb_c >= 1 && map.nb_p == 1)
-		ft_flood_fill(&map, 0, 0);
+	if (map.nb_e != 1 && map.nb_c < 1 && map.nb_p != 1)
+		return (0);
+	ft_flood_fill(&map, 0, 0);
 	if (map.nb_c == 0 && map.nb_e == 0 && map.nb_p == 0)
 		return (1);
 	return (0);
