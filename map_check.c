@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 17:27:26 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:19:14 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,66 @@
 int	map_checker(char *filename)
 {
 	int		fd;
-	t_line	line;
-	t_map	map;
-	char	*line;
+	int		retval;
 
-	map.width = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	while (read_bytes > 0)
+	retval = wrong_letters_in_map(fd);
+	close(fd);
+	fd = open(filename, O_RDONLY);
+	retval = map_is_closed(fd, retval);
+	if (retval == 0)
+		return (retval);
+}
+
+int	wrong_letters_in_map(int fd)
+{
+	t_line	line;
+	char	c;
+
+	while (line.read_bytes > 0)
 	{
-		line = get_next_line(fd);
-		read_bytes = ft_strlen(line);
-		i = 0;
-		while (line[i])
+		line.line = get_next_line(fd);
+		line.read_bytes = ft_strlen(line.line);
+		line.i = 0;
+		while (line.line[line.i])
 		{
-			if (line[i] != '1' && line[i] != '0' && line[i] != 'C'
-				&& line[i] != 'E' && line[i] != 'P')
+			c = line.line[line.i];
+			if (c != '1' && c != '0' && c != 'N' && c != 'C'
+				&& c != 'E' && c != 'P' && c != '\n')
+			{
+				free(line.line);
 				return (0);
-			i++;
+			}
+			line.i++;
 		}
-		map.width += read_bytes;
-		free(line);
+		free(line.line);
 	}
+	return (1);
+}
+
+int	map_is_closed(int fd, int retval)
+{
+	t_line		line;
+	t_map		map;
+	int			tile_count;
+
+	if (retval == 0)
+		return (retval);
+	tile_count = 0;
+	map.width = 0;
+	while (line.read_bytes > 0)
+	{
+		line.line = get_next_line(fd);
+		line.read_bytes = ft_strlen(line.line);
+		if (map.width == 0)
+			map.width = line.read_bytes;
+		map.height++;
+		tile_count += line.read_bytes;
+		free(line.line);
+	}
+	if (tile_count != map.width * map.height)
+		return (0);
+	return (1);
 }
