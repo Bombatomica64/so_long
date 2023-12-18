@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   ft_error_free_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 16:41:23 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 17:09:08 by tfalchi          ###   ########.fr       */
+/*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
+/*   Updated: 2023/12/18 17:12:48 by tfalchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	put_map(char *filename, t_data *data)
+void	ft_lstclear(t_data **tile, t_data **wall, void (*del)(void*))
 {
-	t_image	tile;
-	t_image	wall;
+	t_data	*temp;
 
-	tile.img = put_xmp(data->mlx, "assets/tile.xpm", &tile.width, &tile.height);
-	wall.img = put_xmp(data->mlx, "assets/wall.xpm", &wall.width, &wall.height);
-	if (map_checker(filename) == 0)
-		ft_error_free_map(&tile, &wall, data);
+	if (tile)
+	{
+		while (*tile)
+		{
+			temp = (*tile)->next;
+			if (!tile || !del || !(*tile)
+				return ;
+			del(tile->content);
+			free(tile);
+			(*tile) = temp;
+		}
+	if (wall)
+	{
+		while (*wall)
+		{
+			temp = (*wall)->next;
+			if (!wall || !del || !(*wall)
+				return ;
+			del(wall->content);
+			free(wall);
+			(*wall) = temp;
+		}
+	}
 }
