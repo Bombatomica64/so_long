@@ -6,9 +6,10 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:11:51 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:16:27 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "so_long.h"
 
@@ -23,9 +24,10 @@ int	map_checker(char *filename)
 	retval = wrong_letters_in_map(fd);
 	close(fd);
 	fd = open(filename, O_RDONLY);
-	retval = map_is_closed(fd, retval);
+	retval = map_is_rectangular(fd, retval);
 	if (retval == 0)
 		return (retval);
+	close(fd);
 }
 
 int	wrong_letters_in_map(int fd)
@@ -79,6 +81,7 @@ int	map_is_rectangular(int fd, int retval)
 	return (1);
 }
 
+
 int	map_is_closed(t_map map)
 {
 	int	i;
@@ -106,3 +109,4 @@ int	map_is_closed(t_map map)
 	}
 	return (1);
 }
+
