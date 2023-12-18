@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 18:18:56 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:54:50 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	**map;
+	int		nb_c;
+	int		nb_e;
+	int		nb_p;
 }	t_map;
 
 void	*put_xmp(void *mlx, char *filename, int *width, int *height);
@@ -54,6 +57,6 @@ int		wrong_letters_in_map(int fd);
 int		map_checker(char *filename);
 void	ft_error_free_map(t_data **tile, t_data **wall, void (*del)(void*));
 int		map_is_closed(int fd, int retval);
-char	**get_map(char *filename);
+t_map	get_map(char *filename);
 
 #endif
