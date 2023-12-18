@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   ft_error_free_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 16:41:23 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 17:09:08 by tfalchi          ###   ########.fr       */
+/*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
+/*   Updated: 2023/12/18 17:29:31 by tfalchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	put_map(char *filename, t_data *data)
+void	ft_error_free_map(t_data **tile, t_data **wall, void (*del)(void*))
 {
-	t_image	tile;
-	t_image	wall;
-
-	tile.img = put_xmp(data->mlx, "assets/tile.xpm", &tile.width, &tile.height);
-	wall.img = put_xmp(data->mlx, "assets/wall.xpm", &wall.width, &wall.height);
-	if (map_checker(filename) == 0)
-		ft_error_free_map(&tile, &wall, data);
+	if (tile)
+	{
+		tile->mlx = NULL;
+		tile->win = NULL;
+		free(tile);
+	}
+	if (wall)
+	{
+		wall->mlx = NULL;
+		wall->win = NULL;
+		free(wall);
+	}
+	if (data)
+	{
+		if (data->mlx)
+			free(data->mlx);
+		if (data->win)
+			free(data->win);
+		free(data);
+	}
+	write(2, "Errore di mappa\n", 6);
 }
