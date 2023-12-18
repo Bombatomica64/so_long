@@ -6,37 +6,33 @@
 /*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
-/*   Updated: 2023/12/18 17:12:48 by tfalchi          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:29:31 by tfalchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_lstclear(t_data **tile, t_data **wall, void (*del)(void*))
+void	ft_error_free_map(t_data **tile, t_data **wall, void (*del)(void*))
 {
-	t_data	*temp;
-
 	if (tile)
 	{
-		while (*tile)
-		{
-			temp = (*tile)->next;
-			if (!tile || !del || !(*tile)
-				return ;
-			del(tile->content);
-			free(tile);
-			(*tile) = temp;
-		}
+		tile->mlx = NULL;
+		tile->win = NULL;
+		free(tile);
+	}
 	if (wall)
 	{
-		while (*wall)
-		{
-			temp = (*wall)->next;
-			if (!wall || !del || !(*wall)
-				return ;
-			del(wall->content);
-			free(wall);
-			(*wall) = temp;
-		}
+		wall->mlx = NULL;
+		wall->win = NULL;
+		free(wall);
 	}
+	if (data)
+	{
+		if (data->mlx)
+			free(data->mlx);
+		if (data->win)
+			free(data->win);
+		free(data);
+	}
+	write(2, "Errore di mappa\n", 6);
 }
