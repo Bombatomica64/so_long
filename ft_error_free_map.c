@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
-/*   Updated: 2023/12/19 15:46:18 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:23:04 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@ void	ft_error_free(t_image *tile, t_image *wall, t_data *data)
 {
 	if (tile)
 	{
-		tile->img = NULL;
-		free(tile);
+		free(tile->img);
 	}
 	if (wall)
 	{
-		wall->img = NULL;
-		free(wall);
+		free(wall->img);
 	}
 	if (data)
 	{
-		if (data->mlx)
-			free(data->mlx);
-		if (data->win)
-			free(data->win);
-		free(data);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
 	exit(0);
 }
@@ -47,17 +43,15 @@ void	ft_err_free_map(t_image *tile, t_image *wall, t_data *data, t_map *map)
 		wall->img = NULL;
 		free(wall->img);
 	}
-	if (data)
-	{
-	// 	if (data->mlx)
-	// 		free(data->mlx);
-	// 	if (data->win)
-	// 		free(data->win);
-	// 	free(data);
-	}
 	if (map)
 	{
 		free_matrix(map->map);
+	}
+	if (data)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
 	write(2, "qua\n", 5);
 	exit(0);

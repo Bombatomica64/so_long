@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/19 15:36:32 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:34:44 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	map_checker(char *filename)
 	close(fd);
 	if (retval == 0)
 	{
-		write(2, "Error\nWrong letters in map\n", 27);
+		write(2, "Error Wrong letters in map\n", 27);
 		return (retval);
 	}
 	fd = open(filename, O_RDONLY);
 	retval = map_is_rectangular(fd, retval);
 	if (retval == 0)
 	{
-		write(2, "Error\nMap is not rectangular\n", 29);
+		write(2, "Error Map is not rectangular\n", 29);
 		return (retval);
 	}
 	close(fd);
@@ -43,11 +43,15 @@ int	wrong_letters_in_map(int fd)
 	t_line	line;
 	char	c;
 
+	c = 0;
+	line.read_bytes = 1;
 	while (line.read_bytes > 0)
 	{
 		line.line = get_next_line(fd);
 		line.read_bytes = ft_strlen(line.line);
 		line.i = 0;
+		if (line.read_bytes == 0)
+			break ;
 		while (line.line[line.i])
 		{
 			c = line.line[line.i];
@@ -74,16 +78,23 @@ int	map_is_rectangular(int fd, int retval)
 		return (retval);
 	tile_count = 0;
 	map.width = 0;
+	map.height = 0;
+	line.read_bytes = 1;
 	while (line.read_bytes > 0)
 	{
 		line.line = get_next_line(fd);
 		line.read_bytes = ft_strlen(line.line);
+		if (line.read_bytes == 0)
+			break ;
+		if (line.line[line.read_bytes - 1] == '\n')
+			line.read_bytes--;
 		if (map.width == 0)
 			map.width = line.read_bytes;
 		map.height++;
 		tile_count += line.read_bytes;
 		free(line.line);
 	}
+	ft_printf("tile_count = %d\n", tile_count);
 	if (tile_count != map.width * map.height)
 		return (0);
 	return (1);

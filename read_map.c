@@ -27,6 +27,8 @@ int	ft_count_lines(char *filename)
 	{
 		line.line = get_next_line(fd);
 		line.read_bytes = ft_strlen(line.line);
+		if (line.read_bytes == 0)
+			break ;
 		count++;
 		free(line.line);
 	}
@@ -41,6 +43,7 @@ t_map	get_map(char *filename)
 	int		i;
 
 	map.height = ft_count_lines(filename);
+	map.width = 0;
 	fd = open(filename, O_RDONLY);
 	i = 0;
 	map.map = malloc(sizeof(char *) * (map.height + 1));
