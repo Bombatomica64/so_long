@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:16:47 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:36:32 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,20 @@ int	map_checker(char *filename)
 		return (0);
 	retval = wrong_letters_in_map(fd);
 	close(fd);
+	if (retval == 0)
+	{
+		write(2, "Error\nWrong letters in map\n", 27);
+		return (retval);
+	}
 	fd = open(filename, O_RDONLY);
 	retval = map_is_rectangular(fd, retval);
 	if (retval == 0)
+	{
+		write(2, "Error\nMap is not rectangular\n", 29);
 		return (retval);
+	}
 	close(fd);
+	return (retval);
 }
 
 int	wrong_letters_in_map(int fd)
@@ -55,7 +64,6 @@ int	wrong_letters_in_map(int fd)
 	return (1);
 }
 
-
 int	map_is_rectangular(int fd, int retval)
 {
 	t_line		line;
@@ -80,6 +88,7 @@ int	map_is_rectangular(int fd, int retval)
 		return (0);
 	return (1);
 }
+
 int	map_is_closed(t_map map)
 {
 	int	i;

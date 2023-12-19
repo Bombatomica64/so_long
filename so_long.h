@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:26:20 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:45:04 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,19 @@ typedef struct s_map
 	int		nb_p;
 }	t_map;
 
+t_map	get_map(char *filename);
+void	ft_error_free(t_image *tile, t_image *wall, t_data *data);
+void	ft_err_free_map(t_image *tile, t_image *wall, t_data *data, t_map *map);
+void	ft_flood_fill(t_map *map, int y, int x);
 void	*put_xmp(void *mlx, char *filename, int *width, int *height);
+void	free_matrix(char **matrix);
 int		put_map(char *filename, t_data *data);
 int		wrong_letters_in_map(int fd);
 int		map_checker(char *filename);
-void	ft_error_free_map(t_data **tile, t_data **wall, void (*del)(void*));
 int		map_is_rectangular(int fd, int retval);
-t_map	get_map(char *filename);
 int		ft_count_lines(char *filename);
-void	ft_check_if_map_is_valid(t_map map);
+int		ft_check_if_map_is_valid(t_map map);
 int		map_is_closed(t_map map);
 int		ft_is_reachable(t_map map);
-int		ft_flood_fill(t_map *map, int y, int x);
 
 #endif

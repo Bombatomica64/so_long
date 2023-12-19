@@ -56,11 +56,19 @@ t_map	get_map(char *filename)
 	return (map);
 }
 
-void	ft_check_if_map_is_valid(t_map map)
+int	ft_check_if_map_is_valid(t_map map)
 {
-	int	i;
-
-	i = map_is_closed(map);
+	if (map_is_closed(map) == 0)
+	{
+		ft_printf("Error Map is not closed\n");
+		return (1);
+	}
+	if (ft_is_reachable(map) == 0)
+	{
+		ft_printf("Error Map is not valid\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	put_map(char *filename, t_data *data)
@@ -72,7 +80,10 @@ int	put_map(char *filename, t_data *data)
 	tile.img = put_xmp(data->mlx, "assets/tile.xpm", &tile.width, &tile.height);
 	wall.img = put_xmp(data->mlx, "assets/wall.xpm", &wall.width, &wall.height);
 	if (map_checker(filename) == 0)
-		ft_error_free_map(&tile, &wall, data);
+		ft_error_free(&tile, &wall, data);
 	map = get_map(filename);
-	ft_check_if_map_is_valid(map);
+	if (ft_check_if_map_is_valid(map) == 1)
+		ft_err_free_map(&tile, &wall, data, &map);
+	ft_printf("Map is valid\n");
+	return (0);
 }

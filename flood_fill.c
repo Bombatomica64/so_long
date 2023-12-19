@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:25:38 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/18 19:27:53 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:39:21 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_is_reachable(t_map map)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (map.map[y])
@@ -41,28 +41,22 @@ int	ft_is_reachable(t_map map)
 	return (0);
 }
 
-
-
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int	ft_flood_fill(t_map *map, int y, int x)
+void	ft_flood_fill(t_map *map, int y, int x)
 {
-	if (map.map[y][x] == 'C')
+	if (map->map[y][x] == 'C')
 		map->nb_c--;
-	else if (map.map[y][x] == 'E')
+	else if (map->map[y][x] == 'E')
 		map->nb_e--;
-	else if (map.map[y][x] == 'P')
+	else if (map->map[y][x] == 'P')
 		map->nb_p--;
-	else if (map.map[y][x] == '1' || map.map[y][x] == 'L')
+	else if (map->map[y][x] == '1' || map->map[y][x] == 'L')
 		return ;
 	else
 	{
-		map.map[y][x] = 'L';
-		ft_flood_fill (map, y + 1, x); //su
-		ft_flood_fill (map, y - 1, x); //giu
-		ft_flood_fill (map, y, x - 1); //sinistra
-		ft_flood_fill (map, y, x + 1); //destra
+		map->map[y][x] = 'L';
+		ft_flood_fill (map, y + 1, x);
+		ft_flood_fill (map, y - 1, x);
+		ft_flood_fill (map, y, x - 1);
+		ft_flood_fill (map, y, x + 1);
 	}
 }
