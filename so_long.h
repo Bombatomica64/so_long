@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:13:14 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:26:20 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ t_map	get_map(char *filename);
 int		ft_count_lines(char *filename);
 void	ft_check_if_map_is_valid(t_map map);
 int		map_is_closed(t_map map);
+int		ft_is_reachable(t_map map);
+int		ft_flood_fill(t_map *map, int y, int x);
 
 #endif

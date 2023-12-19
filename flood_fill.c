@@ -6,19 +6,18 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:25:38 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/18 19:10:07 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:27:53 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_is_reachable(t_map map) c'e' solo un P un E e almeno un C
+int	ft_is_reachable(t_map map)
 {
 	int x;
 	int y;
 
 	y = 0;
-	x = 0;
 	while (map.map[y])
 	{
 		x = 0;
@@ -34,14 +33,12 @@ int ft_is_reachable(t_map map) c'e' solo un P un E e almeno un C
 		}
 		y++;
 	}
-
 	if (map.nb_e != 1 || map.nb_c < 1 || map.nb_p != 1)
 		return (0);
 	ft_flood_fill(&map, 0, 0);
 	if (map.nb_c == 0 && map.nb_e == 0 && map.nb_p == 0)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 
@@ -50,7 +47,7 @@ int ft_is_reachable(t_map map) c'e' solo un P un E e almeno un C
 #include <stdio.h>
 #include <stdlib.h>
 
-int ft_flood_fill(t_map *map, int y, int x)
+int	ft_flood_fill(t_map *map, int y, int x)
 {
 	if (map.map[y][x] == 'C')
 		map->nb_c--;
