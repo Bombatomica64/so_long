@@ -8,7 +8,7 @@ CC = cc
 
 SRC = flood_fill.c  ft_error_free_map.c  ft_errors.c  \
 	map_check.c  prova.c  put_images.c  read_map.c  so_long.c \
-	bad_next_line.c
+	bad_next_line.c get_entity.c
 
 
 #OBJ = $(SRC:.c=.o)

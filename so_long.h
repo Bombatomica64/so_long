@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/19 18:33:40 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:11:36 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,41 @@ typedef struct s_map
 	int		nb_e;
 	int		nb_p;
 }	t_map;
+typedef struct s_player
+{
+	int		x;
+	int		y;
+}	t_player;
 
-t_map	get_map(char *filename);
-void	ft_error_free(t_image *tile, t_image *wall, t_data *data);
-void	ft_err_free_map(t_image *tile, t_image *wall, t_data *data, t_map *map);
-void	ft_flood_fill(t_map *map, int y, int x);
-void	*put_xmp(void *mlx, char *filename, int *width, int *height);
-void	free_matrix(char **matrix);
-int		put_map(char *filename, t_data *data);
-int		wrong_letters_in_map(int fd);
-int		map_checker(char *filename);
-int		map_is_rectangular(int fd, int retval);
-int		ft_count_lines(char *filename);
-int		ft_check_if_map_is_valid(t_map map);
-int		map_is_closed(t_map map);
-int		ft_is_reachable(t_map map);
-char	*bad_next_line(int fd);
+typedef struct s_datamap
+{
+	t_data		data;
+	t_map		map;
+	t_image		tile;
+	t_image		babbo;
+	t_image		wall;
+	t_image		exit;
+	t_player	player;
+}	t_datamap;
+
+t_map		get_map(char *filename);
+void		ft_error_free(t_datamap *data);
+void		ft_flood_fill(t_map *map, int y, int x);
+void		*put_xmp(void *mlx, char *filename, int *width, int *height);
+void		free_matrix(char **matrix);
+int			put_map(char *filename, t_datamap *data);
+int			wrong_letters_in_map(int fd);
+int			map_checker(char *filename);
+int			map_is_rectangular(int fd, int retval);
+int			ft_count_lines(char *filename);
+int			ft_check_if_map_is_valid(t_datamap *data);
+int			map_is_closed(t_map map);
+int			ft_is_reachable(t_datamap data);
+char		*bad_next_line(int fd);
+void		ft_put_tile(t_datamap *data, t_map map);
+int			on_keypress(int keysym, t_datamap *datamap);
+int			on_destroy(t_datamap *data);
+t_player	get_player(t_map map);
+void		ft_copy_map(t_map *map_new, t_map map_old);
 
 #endif
