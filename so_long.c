@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:11 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 19:06:06 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:51:52 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,7 @@ int	main(int argc, char **argv)
 	data.data.mlx = mlx_init();
 	if (!data.data.mlx)
 		return (-1);
-	data.data.win = mlx_new_window(data.data.mlx, 600, 600, "hi :)");
-	if (!data.data.win)
-		return (free(data.data.mlx), 1);
-	mlx_hook(data.data.win, DestroyNotify, StructureNotifyMask, &on_destroy, &data);
 	put_image_on_struct(&data);
 	put_map(argv[1], &data);
-	mlx_loop(data.data.mlx);
 	return (0);
 }
