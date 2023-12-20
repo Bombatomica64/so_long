@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:11 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 18:14:48 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:06:06 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,47 +30,73 @@ void	put_image_on_struct(t_datamap *datamap)
 			"assets/exit.xpm", &datamap->exit.width, &datamap->exit.height);
 }
 
-void	ft_move(t_datamap datamap, int x, int y)
+void	ft_move(t_datamap *datamap, int axis, int direction)
 {
-	mlx_put_image_to_window(datamap.data.mlx, datamap.data.win,
-		datamap.babbo.img, x, y);
+	if (direction < 0)
+	{
+		if (axis == 121)
+		{
+			if (ft_check_block(datamap, datamap->player.x, datamap->player.y - 32) == 0)
+			{
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->babbo.img, datamap->player.x, datamap->player.y - 32);
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->tile.img, datamap->player.x, datamap->player.y);
+				datamap->player.y -= 32;
+			}
+		}
+		else if (axis == 120)
+		{
+			if (ft_check_block(datamap, datamap->player.x - 32, datamap->player.y) == 0)
+			{
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->babbo.img, datamap->player.x - 32, datamap->player.y);
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->tile.img, datamap->player.x, datamap->player.y);
+				datamap->player.x -= 32;
+			}
+		}
+	}
+	else if (direction > 0)
+	{
+		if (axis == 121)
+		{
+			if (ft_check_block(datamap, datamap->player.x, datamap->player.y + 32) == 0)
+			{
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->babbo.img, datamap->player.x, datamap->player.y + 32);
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->tile.img, datamap->player.x, datamap->player.y);
+				datamap->player.y += 32;
+			}
+		}
+		else if (axis == 120)
+		{
+			if (ft_check_block(datamap, datamap->player.x + 32, datamap->player.y) == 0)
+			{
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->babbo.img, datamap->player.x + 32, datamap->player.y);
+				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+					datamap->tile.img, datamap->player.x, datamap->player.y);
+				datamap->player.x += 32;
+			}
+			ft_printf("x: %d\n", datamap->player.x);
+		}
+	}
 }
 
 int	on_keypress(int keysym, t_datamap *datamap)
 {
-	static int	x = 0;
-	static int	y = 0;
-
-	put_image_on_struct(datamap);
 	if (keysym == 119)
-	{
-		//y = ft_move(datamap, x, y - 32);
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->tile.img, x, y);
-		ft_move(*datamap, x, y - 32);
-		y -= 32;
-        //mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->babbo.img, x, y);
-	}
+		ft_move(datamap, 'y', -32);
 	else if (keysym == 97)
-	{
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->tile.img, x, y);
-		ft_move(*datamap, x - 32, y);
-		x -= 32;
-        //mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->babbo.img, x, y);
-	}
-	else if (keysym == 115) // 's'
-	{
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->tile.img, x, y);
-		ft_move(*datamap, x, y + 32);
-		y += 32;
-        //mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->babbo.img, x, y);
-	}
+		ft_move(datamap, 'x', -32);
+	else if (keysym == 115)
+		ft_move(datamap, 'y', 32);
 	else if (keysym == 100)
-	{
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->tile.img, x, y);
-		ft_move(*datamap, x + 32, y);
-		x += 32;
-		//mlx_put_image_to_window(datamap->data.mlx, datamap->data.win, datamap->babbo.img, x, y);
-	}
+		ft_move(datamap, 'x', 32);
+	// else if (keysym == 65307)
+	// 	ft_error_free(datamap);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 18:11:36 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:08:38 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ int			on_keypress(int keysym, t_datamap *datamap);
 int			on_destroy(t_datamap *data);
 t_player	get_player(t_map map);
 void		ft_copy_map(t_map *map_new, t_map map_old);
+int			ft_check_block(t_datamap *datamap, int x, int y);
+int			get_collectibles(t_map map);
+void		ft_move(t_datamap *datamap, int axis, int direction);
 
 #endif

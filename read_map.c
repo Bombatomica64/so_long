@@ -121,6 +121,7 @@ int	put_map(char *filename, t_datamap *data)
 	if (ft_check_if_map_is_valid(data) == 1)
 		ft_error_free(data);
 	ft_put_tile(data, data->map);
+	data->map.nb_c = get_collectibles(data->map);
 	mlx_hook(data->data.win, KeyRelease, KeyReleaseMask,
 		&on_keypress, &data->data);
 	mlx_hook(data->data.win, DestroyNotify, StructureNotifyMask,

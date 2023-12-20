@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:34:40 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 16:35:09 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:07:30 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_player	get_player(t_map map)
 		{
 			if (map.map[y][x] == 'P')
 			{
-				player.x = x;
-				player.y = y;
+				player.x = 32 * x;
+				player.y = 32 * y;
 				return (player);
 			}
 			x++;
@@ -35,4 +35,26 @@ t_player	get_player(t_map map)
 		y++;
 	}
 	return (player);
+}
+
+int	get_collectibles(t_map map)
+{
+	int	x;
+	int	y;
+	int	collectibles;
+
+	collectibles = 0;
+	y = 0;
+	while (map.map[y])
+	{
+		x = 0;
+		while (map.map[y][x])
+		{
+			if (map.map[y][x] == 'C')
+				collectibles++;
+			x++;
+		}
+		y++;
+	}
+	return (collectibles);
 }

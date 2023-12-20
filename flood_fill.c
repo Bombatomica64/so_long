@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:25:38 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/20 17:42:57 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:47:06 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_is_reachable(t_datamap data)
 	if (data.map.nb_e != 1 || data.map.nb_c < 1 || data.map.nb_p != 1)
 		return (0);
 	ft_copy_map(&map, data.map);
-	ft_flood_fill(&map, data.player.y, data.player.x);
+	ft_flood_fill(&map, data.player.y / 32, data.player.x / 32);
 	if (map.nb_c == 0 && map.nb_e == 0 && map.nb_p == 0)
 	{
 		free_matrix(map.map);
