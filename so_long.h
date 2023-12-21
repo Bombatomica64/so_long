@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 12:45:23 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:33:07 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_datamap
 	t_image		black;
 	t_enemy		*enemies;
 	t_player	player;
+	int			moves;
+	char		*moves_str;
 }	t_datamap;
 
 t_map		get_map(char *filename);
@@ -118,5 +120,10 @@ void		enemy_move(t_datamap *data);
 void		ft_flood_light(t_datamap *data, int x, int y);
 void		ft_rem_lights(t_datamap *data, int x, int y);
 void		ft_flooding_light(t_datamap *data, int x, int y, int radius);
-
+void		put_image_on_struct(t_datamap *datamap);
+void		ft_1_to_w(t_datamap *datamap, int x, int y);
+void		ft_printmoves(t_datamap *datamap);
+int			ft_max(int a, int b);
+int			ft_min(int a, int b);
+void		ft_flooding_light_w(t_datamap *data, int x, int y, int radius);
 #endif

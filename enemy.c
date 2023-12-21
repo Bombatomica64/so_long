@@ -14,14 +14,10 @@
 
 void   ft_first_enemy(t_datamap *data)
 {
-    t_enemy *temp;
-
-    temp = data->enemies;
-    while (temp)
-    {
-        temp = temp->prev;
-    }
-    data->enemies = temp;
+	while (data->enemies && data->enemies->prev)
+	{
+		data->enemies = data->enemies->prev;
+	}
 }
 
 int ft_random_number(void)
@@ -57,7 +53,9 @@ void	ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enem
 				enemy_img, enemy->x, enemy->y - 32);
 			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 				datamap->black.img, enemy->x, enemy->y);
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
 			enemy->y -= 32;
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
 		}
 	}
 	else if (direction == 2)
@@ -68,7 +66,9 @@ void	ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enem
 				enemy_img, enemy->x - 32, enemy->y);
 			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 				datamap->black.img, enemy->x, enemy->y);
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
 			enemy->x -= 32;
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
 		}
 	}
 	else if (direction == 3)
@@ -79,7 +79,9 @@ void	ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enem
 				enemy_img, enemy->x, enemy->y + 32);
 			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 				datamap->black.img, enemy->x, enemy->y);
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
 			enemy->y += 32;
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
 		}
 	}
 	else if (direction == 4)
@@ -90,7 +92,9 @@ void	ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enem
 				enemy_img, enemy->x + 32, enemy->y);
 			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 				datamap->black.img, enemy->x, enemy->y);
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
 			enemy->x += 32;
+			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
 		}
 	}
 }
@@ -104,8 +108,7 @@ void	enemy_move(t_datamap *data)
 	{
 		direction = ft_random_number();
 		ft_move_enemy(data, data->enemies, direction, data->enemy.img);
-		ft_remove_light(data, data->enemies);
-		ft_put_light(data, data->enemies, direction);
+		ft_flooding_light(data, data->enemies->x, data->enemies->y, 1);
 		data->enemies = data->enemies->next;
 	}
 }

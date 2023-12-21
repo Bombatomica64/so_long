@@ -129,7 +129,7 @@ int	put_map(char *filename, t_datamap *data)
 	//if (ft_check_if_map_is_valid(data) == 1)
 	//	ft_error_free(data);
 	data->data.win = mlx_new_window(data->data.mlx, data->map.width * 32,
-			data->map.height * 32, "so_long");
+			(data->map.height * 32) + 64, "so_long");
 	ft_put_tile(data, data->map);
 	mlx_hook(data->data.win, KeyRelease, KeyReleaseMask,
 		&on_keypress, &data->data);
