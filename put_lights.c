@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:15:06 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 12:30:36 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:56:27 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,44 +107,51 @@ void	ft_rem_lights(t_datamap *data, int x, int y)
 
 void	ft_flooding_light(t_datamap *data, int x, int y, int radius)
 {
-	if (radius < 0 || x < 0 || y < 0 || x >= data->map.width
-		|| y >= data->map.height || data->map.map[y][x] == 'W')
+	if (radius < 0 || x < 0 || y < 0 || x >= data->map.width * 32
+		|| y >= data->map.height * 32 || data->map.map[y / 32][x / 32] == 'W')
 		return ;
-	if (data->map.map[y][x] == 'C')
+	// if (data->map.map[y][x] == 'C')
+	// {
+	// 	ft_printf("collectible\n");
+	// 	mlx_put_image_to_window(data->data.mlx, data->data.win, data->collectible.img, x, y);
+	// 	return ;
+	// }
+	if (data->map.map[y / 32][x / 32] == 'E')
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->collectible.img, x * 32, y * 32);
+		ft_printf("exit\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->exit.img, x, y);
 		return ;
 	}
-	else if (data->map.map[y][x] == 'E')
+	else if (data->map.map[y / 32][x / 32] == '1')
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->exit.img, x * 32, y * 32);
-		return ;
-	}
-	else if (data->map.map[y][x] == '1')
-	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->wall.img, x * 32, y * 32);
+		ft_printf("wall\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->wall.img, x, y);
 		return ;
 	}
 	else if (data->player.x == x && data->player.y == y)
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->babbo.img, x * 32, y * 32);
-		return ;
+		ft_printf("babbo\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->babbo.img, x, y);
 	}
 	else if (radius == 3)
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile75.img, x * 32, y * 32);
-		data->map.map[y][x] = 'l';
+		ft_printf("tile75\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile75.img, x, y);
+		data->map.map[y / 32][x / 32] = 'l';
 	}
 	else if (radius == 2)
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile50.img, x * 32, y * 32);
-		data->map.map[y][x] = 'l';
+		ft_printf("tile50\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile50.img, x, y);
+		data->map.map[y / 32][x / 32] = 'l';
 	}
 	else if (radius == 1)
 	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile25.img, x * 32, y * 32);
-		data->map.map[y][x] = 'l';
+		ft_printf("tile25\n");
+		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile25.img, x, y);
+		data->map.map[y / 32][x / 32] = 'l';
 	}
+	ft_printf("x: %d y: %d\n", x, y);
 	ft_flooding_light(data, x + 1, y, radius - 1);
 	ft_flooding_light(data, x - 1, y, radius - 1);
 	ft_flooding_light(data, x, y + 1, radius - 1);
