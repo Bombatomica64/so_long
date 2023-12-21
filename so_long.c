@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:11 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 16:53:09 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:25:22 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ char	*ft_strjoin2(char *old_str, char *buf)
 	size_t	i;
 	size_t	j;
 
-	if (!old_str)
-	{
-		old_str = (char *)malloc(1 * sizeof(char));
-		if (!old_str || !buf)
-			return (NULL);
-		old_str[0] = '\0';
-	}
 	res = malloc(sizeof(char) * (ft_strlen(old_str) + ft_strlen(buf) + 1));
 	if (!res)
 		return (0);
@@ -42,7 +35,6 @@ char	*ft_strjoin2(char *old_str, char *buf)
 	while (buf[j] != '\0')
 		res[i++] = buf[j++];
 	res[ft_strlen(old_str) + ft_strlen(buf)] = '\0';
-	free(buf);
 	return (res);
 }
 
@@ -50,7 +42,7 @@ void	ft_printmoves(t_datamap *datamap)
 {
 	mlx_string_put(datamap->data.mlx, datamap->data.win, 64,
 		datamap->map.height * 32 + 32, 0x000000, datamap->moves_str);
-	free(datamap->moves_str);
+	//free(datamap->moves_str);
 	datamap->moves_str = ft_itoa(datamap->moves);
 	if (!datamap->moves_str)
 		return ;
@@ -58,7 +50,6 @@ void	ft_printmoves(t_datamap *datamap)
 	mlx_string_put(datamap->data.mlx, datamap->data.win, 64,
 		datamap->map.height * 32 + 32, 0xFFFFFF, datamap->moves_str);
 }
-
 
 void	put_image_on_struct(t_datamap *datamap)
 {
@@ -98,9 +89,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 					datamap->babbo.img, datamap->player.x, datamap->player.y - 32);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->black.img, datamap->player.x, datamap->player.y);
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
+				//datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
 				datamap->player.y -= 32;
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
+				//datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
 				ft_flood_light(datamap, datamap->player.x, datamap->player.y + 32);
 			}
 		}
@@ -112,9 +103,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 					datamap->babbo.img, datamap->player.x - 32, datamap->player.y);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->black.img, datamap->player.x, datamap->player.y);
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
+				//datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
 				datamap->player.x -= 32;
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
+				//datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
 				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
@@ -129,9 +120,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 					datamap->babbo.img, datamap->player.x, datamap->player.y + 32);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->black.img, datamap->player.x, datamap->player.y);
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
+			//	datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
 				datamap->player.y += 32;
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
+			//	datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
 				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
@@ -143,9 +134,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 					datamap->babbo.img, datamap->player.x + 32, datamap->player.y);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->black.img, datamap->player.x, datamap->player.y);
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
+			//	datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = '0';
 				datamap->player.x += 32;
-				datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
+			//	datamap->map.map[datamap->player.y / 32][datamap->player.x / 32] = 'P';
 				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
@@ -154,6 +145,8 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 
 int	on_keypress(int keysym, t_datamap *datamap)
 {
+	datamap->moves++;
+	ft_printmoves(datamap);
 	if (keysym == 119)
 		ft_move(datamap, 'y', -32);
 	else if (keysym == 97)
@@ -164,7 +157,7 @@ int	on_keypress(int keysym, t_datamap *datamap)
 		ft_move(datamap, 'x', 32);
 	else if (keysym == 65307)
 		ft_error_free(datamap);
-	enemy_move(datamap);
+//	enemy_move(datamap);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
-/*   Updated: 2023/12/20 19:55:50 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:03:09 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,26 @@ void	ft_error_free(t_datamap *data)
 {
 	if (data->tile.img != NULL)
 		mlx_destroy_image(data->data.mlx, data->tile.img);
-	if (data->wall.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->wall.img);
+	if (data->tile25.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->tile25.img);
+	if (data->tile50.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->tile50.img);
+	if (data->tile75.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->tile75.img);
 	if (data->babbo.img != NULL)
 		mlx_destroy_image(data->data.mlx, data->babbo.img);
+	if (data->wall.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->wall.img);
+	if (data->wall_light.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->wall_light.img);
+	if (data->enemy.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->enemy.img);
 	if (data->exit.img != NULL)
 		mlx_destroy_image(data->data.mlx, data->exit.img);
+	if (data->collectible.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->collectible.img);
+	if (data->black.img != NULL)
+		mlx_destroy_image(data->data.mlx, data->black.img);
 	if (data->map.map != NULL)
 		free_matrix(data->map.map);
 	if (data->data.mlx != NULL)

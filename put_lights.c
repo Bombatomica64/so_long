@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:15:06 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 16:55:35 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:09:27 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,17 +193,14 @@ void	ft_flooding_light_w(t_datamap *data, int x, int y, int radius)
 	else if (radius == 3)
 	{
 		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile75.img, x, y);
-		data->map.map[map_y][map_x] = 'w';
 	}
 	else if (radius == 2)
 	{
 		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile50.img, x, y);
-		data->map.map[map_y][map_x] = 'w';
 	}
 	else if (radius == 1)
 	{
 		mlx_put_image_to_window(data->data.mlx, data->data.win, data->tile25.img, x, y);
-		data->map.map[map_y][map_x] = 'w';
 	}
 	ft_flooding_light_w(data, x + 32, y, radius - 1);
 	ft_flooding_light_w(data, x - 32, y, radius - 1);
