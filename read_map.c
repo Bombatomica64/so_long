@@ -93,19 +93,25 @@ void	ft_put_tile(t_datamap *data, t_map map)
 		{
 			if (map.map[y][x] == '1')
 				mlx_put_image_to_window(data->data.mlx, data->data.win,
-					data->wall.img, x * 32, y * 32);
+					data->black.img, x * 32, y * 32);
 			else if (map.map[y][x] == '0')
 				mlx_put_image_to_window(data->data.mlx, data->data.win,
-					data->tile.img, x * 32, y * 32);
+					data->black.img, x * 32, y * 32);
 			else if (map.map[y][x] == 'P')
 				mlx_put_image_to_window(data->data.mlx, data->data.win,
 					data->babbo.img, x * 32, y * 32);
 			else if (map.map[y][x] == 'C')
 				mlx_put_image_to_window(data->data.mlx, data->data.win,
-					data->tile.img, x * 32, y * 32);
+					data->black.img, x * 32, y * 32);
 			else if (map.map[y][x] == 'E')
 				mlx_put_image_to_window(data->data.mlx, data->data.win,
-					data->tile.img, x * 32, y * 32);
+					data->black.img, x * 32, y * 32);
+			else if (map.map[y][x] == 'N')
+			{
+				mlx_put_image_to_window(data->data.mlx, data->data.win,
+					data->enemy.img, x * 32, y * 32);
+				data->map.nb_n++;
+			}
 			x++;
 		}
 		y++;
@@ -116,14 +122,15 @@ int	put_map(char *filename, t_datamap *data)
 {
 	if (map_checker(filename) == 0)
 		ft_error_free(data);
-	data->map = get_map(filename);
-	data->player = get_player(data->map);
 	if (ft_check_if_map_is_valid(data) == 1)
 		ft_error_free(data);
+	data->map = get_map(filename);
+	data->player = get_player(data->map);
+	data->enemies = get_enemies(data->map);
+	data->map.nb_c = get_collectibles(data->map);
 	data->data.win = mlx_new_window(data->data.mlx, data->map.width * 32,
 			data->map.height * 32, "so_long");
 	ft_put_tile(data, data->map);
-	data->map.nb_c = get_collectibles(data->map);
 	ft_error_free(data);
 	mlx_hook(data->data.win, KeyRelease, KeyReleaseMask,
 		&on_keypress, &data->data);

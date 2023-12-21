@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:34:40 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 19:07:30 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:42:06 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,48 @@ int	get_collectibles(t_map map)
 		y++;
 	}
 	return (collectibles);
+}
+
+void	ft_add_enemy(t_enemy **enemy, int x, int y)
+{
+	t_enemy	*new_enemy;
+	t_enemy	*temp;
+
+	new_enemy = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!new_enemy)
+		return ;
+	new_enemy->x = 32 * x;
+	new_enemy->y = 32 * y;
+	new_enemy->next = NULL;
+	if (*enemy == NULL)
+		*enemy = new_enemy;
+	else
+	{
+		temp = *enemy;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_enemy;
+	}
+}
+
+t_enemy	*get_enemies(t_map map)
+{
+	t_enemy	*enemy;
+	int		x;
+	int		y;
+
+	enemy = NULL;
+	y = 0;
+	while (map.map[y])
+	{
+		x = 0;
+		while (map.map[y][x])
+		{
+			if (map.map[y][x] == 'E')
+				ft_add_enemy(&enemy, x, y);
+			x++;
+		}
+		y++;
+	}
+	return (enemy);
 }

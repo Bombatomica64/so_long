@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 19:08:38 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:45:06 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <time.h>
 
 typedef struct s_data
 {
@@ -49,6 +50,7 @@ typedef struct s_map
 	int		nb_c;
 	int		nb_e;
 	int		nb_p;
+	int		nb_n;
 }	t_map;
 typedef struct s_player
 {
@@ -56,14 +58,30 @@ typedef struct s_player
 	int		y;
 }	t_player;
 
+typedef struct s_enemy
+{
+	int				x;
+	int				y;
+	struct s_enemy	*next;
+	struct s_enemy	*prev;
+}	t_enemy;
+
 typedef struct s_datamap
 {
 	t_data		data;
 	t_map		map;
 	t_image		tile;
+	t_image		tile25;
+	t_image		tile50;
+	t_image		tile75;
 	t_image		babbo;
 	t_image		wall;
+	t_image		wall_light;
+	t_image		enemy;
 	t_image		exit;
+	t_image		collectible;
+	t_image		black;
+	t_enemy		*enemies;
 	t_player	player;
 }	t_datamap;
 
@@ -89,5 +107,13 @@ void		ft_copy_map(t_map *map_new, t_map map_old);
 int			ft_check_block(t_datamap *datamap, int x, int y);
 int			get_collectibles(t_map map);
 void		ft_move(t_datamap *datamap, int axis, int direction);
+void		ft_first_enemy(t_datamap *data);
+void		ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enemy_img);
+void		ft_put_light(t_datamap *data, t_enemy *enemy, int direction);
+void		ft_remove_light(t_datamap *data, t_enemy *enemy);
+t_enemy		*get_enemies(t_map map);
+int			ft_check_block_e(t_datamap *datamap, int x, int y);
+int			ft_random_number(void);
+void		enemy_move(t_datamap *data);
 
 #endif
