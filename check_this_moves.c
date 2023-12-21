@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:42:02 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/20 19:09:37 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:10:36 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_check_block(t_datamap *datamap, int x, int y)
 {
-	if (datamap->map.map[y / 32][x / 32] == '1')
+	if (datamap->map.map[y / 32][x / 32] == '1' || datamap->map.map[y / 32][x / 32] == 'W')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
 	{

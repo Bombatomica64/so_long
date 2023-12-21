@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 10:45:06 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:06:56 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ t_enemy		*get_enemies(t_map map);
 int			ft_check_block_e(t_datamap *datamap, int x, int y);
 int			ft_random_number(void);
 void		enemy_move(t_datamap *data);
+void		ft_flood_light(t_datamap *data, int x, int y);
+void		ft_rem_lights(t_datamap *data, int x, int y);
 
 #endif

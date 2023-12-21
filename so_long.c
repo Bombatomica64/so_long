@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:11 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 10:52:31 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:33:20 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	put_image_on_struct(t_datamap *datamap)
 			"assets/wall.xpm", &datamap->wall.width, &datamap->wall.height);
 	datamap->exit.img = put_xmp(datamap->data.mlx,
 			"assets/exit.xpm", &datamap->exit.width, &datamap->exit.height);
-	datamap->collectible.img = put_xmp(datamap->data.mlx,
-			"assets/collectible.xpm", &datamap->collectible.width, &datamap->collectible.height);
+//	datamap->collectible.img = put_xmp(datamap->data.mlx,
+//			"assets/collectible.xpm", &datamap->collectible.width, &datamap->collectible.height);
 	datamap->black.img = put_xmp(datamap->data.mlx,
 			"assets/black.xpm", &datamap->black.width, &datamap->black.height);
-	datamap->enemy.img = put_xmp(datamap->data.mlx,
-			"assets/enemy.xpm", &datamap->enemy->width, &datamap->enemy->height);
+	// datamap->enemy.img = put_xmp(datamap->data.mlx,
+	// 		"assets/enemy.xpm", &datamap->enemy.width, &datamap->enemy.height);
 	datamap->tile25.img = put_xmp(datamap->data.mlx,
 			"assets/tile25.xpm", &datamap->tile25.width, &datamap->tile25.height);
 	datamap->tile50.img = put_xmp(datamap->data.mlx,
@@ -41,7 +41,7 @@ void	put_image_on_struct(t_datamap *datamap)
 	datamap->tile75.img = put_xmp(datamap->data.mlx,
 			"assets/tile75.xpm", &datamap->tile75.width, &datamap->tile75.height);
 	datamap->wall_light.img = put_xmp(datamap->data.mlx,
-			"assets/wall_light.xpm", &datamap->wall_light.width, &datamap->wall_light.height);
+	 		"assets/wall_light.xpm", &datamap->wall_light.width, &datamap->wall_light.height);
 }
 
 void	ft_move(t_datamap *datamap, int axis, int direction)
@@ -55,8 +55,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->babbo.img, datamap->player.x, datamap->player.y - 32);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->tile.img, datamap->player.x, datamap->player.y);
+					datamap->black.img, datamap->player.x, datamap->player.y);
 				datamap->player.y -= 32;
+				ft_flood_light(datamap, datamap->player.x, datamap->player.y + 32);
 			}
 		}
 		else if (axis == 120)
@@ -66,8 +67,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->babbo.img, datamap->player.x - 32, datamap->player.y);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->tile.img, datamap->player.x, datamap->player.y);
+					datamap->black.img, datamap->player.x, datamap->player.y);
 				datamap->player.x -= 32;
+				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
 	}
@@ -80,8 +82,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->babbo.img, datamap->player.x, datamap->player.y + 32);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->tile.img, datamap->player.x, datamap->player.y);
+					datamap->black.img, datamap->player.x, datamap->player.y);
 				datamap->player.y += 32;
+				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
 		else if (axis == 120)
@@ -91,8 +94,9 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
 					datamap->babbo.img, datamap->player.x + 32, datamap->player.y);
 				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->tile.img, datamap->player.x, datamap->player.y);
+					datamap->black.img, datamap->player.x, datamap->player.y);
 				datamap->player.x += 32;
+				ft_flood_light(datamap, datamap->player.x - 32, datamap->player.y);
 			}
 		}
 	}
@@ -110,7 +114,7 @@ int	on_keypress(int keysym, t_datamap *datamap)
 		ft_move(datamap, 'x', 32);
 	else if (keysym == 65307)
 		ft_error_free(datamap);
-	enemy_move(datamap);
+	//enemy_move(datamap);
 	return (0);
 }
 
