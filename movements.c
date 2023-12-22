@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:49 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 17:22:15 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:43:56 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->player.y / 32 - dr_y / 32]
 				[data->player.x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y);
+		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
 }
 
