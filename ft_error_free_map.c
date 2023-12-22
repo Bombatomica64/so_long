@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:05:55 by tfalchi           #+#    #+#             */
-/*   Updated: 2023/12/21 17:03:09 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:52:19 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ void	ft_error_free(t_datamap *data)
 		mlx_destroy_image(data->data.mlx, data->black.img);
 	if (data->map.map != NULL)
 		free_matrix(data->map.map);
+	if (data->enemies != NULL)
+		ft_free_enemy(data);
+	if (data->moves_str != NULL)
+		free(data->moves_str);
 	if (data->data.mlx != NULL)
 	{
-		mlx_destroy_window(data->data.mlx, data->data.win);
+		if (data->data.win != NULL)
+			mlx_destroy_window(data->data.mlx, data->data.win);
 		mlx_destroy_display(data->data.mlx);
 		free(data->data.mlx);
 	}
@@ -60,4 +65,16 @@ void	free_matrix(char **matrix)
 		i++;
 	}
 	free(matrix);
+}
+
+void	ft_free_enemy(t_datamap *data)
+{
+	t_enemy	*tmp;
+
+	while (data->enemies)
+	{
+		tmp = data->enemies;
+		data->enemies = data->enemies->next;
+		free(tmp);
+	}
 }

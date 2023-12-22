@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:34:40 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 10:42:06 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:46:16 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,48 @@ int	get_collectibles(t_map map)
 	return (collectibles);
 }
 
-void	ft_add_enemy(t_enemy **enemy, int x, int y)
+int	get_exits(t_map map)
 {
-	t_enemy	*new_enemy;
-	t_enemy	*temp;
+	int	x;
+	int	y;
+	int	exits;
 
-	new_enemy = (t_enemy *)malloc(sizeof(t_enemy));
-	if (!new_enemy)
-		return ;
-	new_enemy->x = 32 * x;
-	new_enemy->y = 32 * y;
-	new_enemy->next = NULL;
-	if (*enemy == NULL)
-		*enemy = new_enemy;
-	else
+	exits = 0;
+	y = 0;
+	while (map.map[y])
 	{
-		temp = *enemy;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new_enemy;
+		x = 0;
+		while (map.map[y][x])
+		{
+			if (map.map[y][x] == 'E')
+				exits++;
+			x++;
+		}
+		y++;
 	}
+	return (exits);
+}
+
+int	get_player_nbr(t_map map)
+{
+	int	x;
+	int	y;
+	int	player;
+
+	player = 0;
+	y = 0;
+	while (map.map[y])
+	{
+		x = 0;
+		while (map.map[y][x])
+		{
+			if (map.map[y][x] == 'P')
+				player++;
+			x++;
+		}
+		y++;
+	}
+	return (player);
 }
 
 t_enemy	*get_enemies(t_map map)

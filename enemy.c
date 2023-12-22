@@ -12,7 +12,29 @@
 
 #include "so_long.h"
 
-void   ft_first_enemy(t_datamap *data)
+void	ft_add_enemy(t_enemy **enemy, int x, int y)
+{
+	t_enemy	*new_enemy;
+	t_enemy	*temp;
+
+	new_enemy = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!new_enemy)
+		return ;
+	new_enemy->x = 32 * x;
+	new_enemy->y = 32 * y;
+	new_enemy->next = NULL;
+	if (*enemy == NULL)
+		*enemy = new_enemy;
+	else
+	{
+		temp = *enemy;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_enemy;
+	}
+}
+
+void	ft_first_enemy(t_datamap *data)
 {
 	while (data->enemies && data->enemies->prev)
 	{
@@ -25,16 +47,18 @@ int	ft_random_number(void)
 	return (rand() % 4 + 1);
 }
 
-int ft_check_block_e(t_datamap *datamap, int x, int y)
+int	ft_check_block_e(t_datamap *datamap, int x, int y)
 {
 	if (datamap->map.map[y / 32][x / 32] == '1')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
-		return (2);
+		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
-		return (3);
+		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'P')
 	{
+		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+			datamap->enemy.img, x, y);
 		ft_printf("You lose\n");
 		ft_error_free(datamap);
 	}
@@ -43,60 +67,16 @@ int ft_check_block_e(t_datamap *datamap, int x, int y)
 	return (0);
 }
 
-void	ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enemy_img)
+void	ft_move_enemy(t_datamap *data, t_enemy *enemy, int dir, void *img)
 {
-	if (direction == 1)
-	{
-		if (ft_check_block_e(datamap, enemy->x, enemy->y - 32) == 0)
-		{
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				enemy_img, enemy->x, enemy->y - 32);
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				datamap->black.img, enemy->x, enemy->y);
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
-			enemy->y -= 32;
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
-		}
-	}
-	else if (direction == 2)
-	{
-		if (ft_check_block_e(datamap, enemy->x - 32, enemy->y) == 0)
-		{
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				enemy_img, enemy->x - 32, enemy->y);
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				datamap->black.img, enemy->x, enemy->y);
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
-			enemy->x -= 32;
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
-		}
-	}
-	else if (direction == 3)
-	{
-		if (ft_check_block_e(datamap, enemy->x, enemy->y + 32) == 0)
-		{
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				enemy_img, enemy->x, enemy->y + 32);
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				datamap->black.img, enemy->x, enemy->y);
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
-			enemy->y += 32;
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
-		}
-	}
-	else if (direction == 4)
-	{
-		if (ft_check_block_e(datamap, enemy->x + 32, enemy->y) == 0)
-		{
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				enemy_img, enemy->x + 32, enemy->y);
-			mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-				datamap->black.img, enemy->x, enemy->y);
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = '0';
-			enemy->x += 32;
-			datamap->map.map[enemy->y / 32][enemy->x / 32] = 'N';
-		}
-	}
+	if (dir == 1)
+		ft_movement_e(data, img, 0, -32);
+	else if (dir == 2)
+		ft_movement_e(data, img, -32, 0);
+	else if (dir == 3)
+		ft_movement_e(data, img, 0, 32);
+	else if (dir== 4)
+		ft_movement_e(data, img, 32, 0);
 }
 
 void	enemy_move(t_datamap *data)
@@ -108,7 +88,6 @@ void	enemy_move(t_datamap *data)
 	{
 		direction = ft_random_number();
 		ft_move_enemy(data, data->enemies, direction, data->enemy.img);
-		ft_flooding_light(data, data->enemies->x, data->enemies->y, 1);
 		data->enemies = data->enemies->next;
 	}
 }

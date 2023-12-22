@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:11 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 12:28:13 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 16:34:37 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	on_keypress(int keysym, t_datamap *datamap)
 		ft_move(datamap, 'x', 32);
 	else if (keysym == 65307)
 		ft_error_free(datamap);
-//	enemy_move(datamap);
+	enemy_move(datamap);
 	if (datamap->moves_happened == 1)
 	{
 		datamap->moves++;
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	data.moves = 0;
 	data.moves_happened = 0;
 	data.moves_str = ft_itoa(data.moves);
+	data.data.win = NULL;
 	srand(time(0));
 	put_image_on_struct(&data);
 	put_map(argv[1], &data);

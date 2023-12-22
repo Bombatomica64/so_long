@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:49 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 12:28:30 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:10:14 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,49 @@ void	ft_printmoves(t_datamap *datamap)
 	datamap->moves_str = ft_strjoin2("Moves done : ", datamap->moves_str);
 	mlx_string_put(datamap->data.mlx, datamap->data.win, 64,
 		datamap->map.height * 32 + 32, 0xFFFFFF, datamap->moves_str);
+}
+
+void	ft_print_map(t_map map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map.map[y])
+	{
+		x = 0;
+		while (map.map[y][x])
+		{
+			printf("%c", map.map[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}
+
+void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
+{
+	if (ft_check_block_e(data, data->enemy.x + dr_x, data->enemy.y + dr_y) == 0)
+	{
+		mlx_put_image_to_window(data->data.mlx, data->data.win,
+			img, data->enemy.x + dr_x, data->enemy.y + dr_y);
+		mlx_put_image_to_window(data->data.mlx, data->data.win,
+			data->black.img, data->enemy.x, data->enemy.y);
+		data->enemy.x += dr_x;
+		data->enemy.y += dr_y;
+		if (data->map.map[data->enemy.y / 32][data->enemy.x / 32] == '0')
+		{
+			data->map.map[data->enemy.y / 32][data->enemy.x / 32] = 'N';
+			if (data->map.map[data->enemy.y / 32 - dr_y / 32]
+				[data->enemy.x / 32 - dr_x / 32] != 'E' && data->map.map[data->enemy.y / 32 - dr_y / 32]
+				[data->enemy.x / 32 - dr_x / 32] != 'C')
+				data->map.map[data->enemy.y / 32 - dr_y / 32]
+				[data->enemy.x / 32 - dr_x / 32] = '0';
+		}
+		ft_flood_light(data, data->enemy.x - dr_x, data->enemy.y - dr_y, 1);
+	}
+}
+{
+	"sss"
 }

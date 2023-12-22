@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:25:38 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/20 18:47:06 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:23:30 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,8 @@
 
 int	ft_is_reachable(t_datamap data)
 {
-	int		x;
-	int		y;
 	t_map	map;
 
-	y = 0;
-	while (data.map.map[y])
-	{
-		x = 0;
-		while (data.map.map[y][x])
-		{
-			if (data.map.map[y][x] == 'E')
-				data.map.nb_e++;
-			if (data.map.map[y][x] == 'C')
-				data.map.nb_c++;
-			if (data.map.map[y][x] == 'P')
-				data.map.nb_p++;
-			x++;
-		}
-		y++;
-	}
 	if (data.map.nb_e != 1 || data.map.nb_c < 1 || data.map.nb_p != 1)
 		return (0);
 	ft_copy_map(&map, data.map);

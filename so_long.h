@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 11:51:40 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 16:58:55 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ t_enemy		*get_enemies(t_map map);
 int			ft_check_block_e(t_datamap *datamap, int x, int y);
 int			ft_random_number(void);
 void		enemy_move(t_datamap *data);
-void		ft_flood_light(t_datamap *data, int x, int y);
-void		ft_rem_lights(t_datamap *data, int x, int y);
+void		ft_flood_light(t_datamap *data, int x, int y, int radius);
+void		ft_rem_lights(t_datamap *data, int x, int y, int offset);
 void		ft_flooding_light(t_datamap *data, int x, int y, int radius);
 void		put_image_on_struct(t_datamap *datamap);
 void		ft_1_to_w(t_datamap *datamap, int x, int y);
@@ -129,5 +129,10 @@ int			ft_min(int a, int b);
 void		ft_flooding_light_w(t_datamap *data, int x, int y, int radius);
 char		*ft_strjoin2(char *old_str, char *buf);
 void		movement_player(t_datamap *data, void *img, int dr_x, int dr_y);
+void		ft_free_enemy(t_datamap *data);
+void		ft_print_map(t_map map);
+int			get_exits(t_map map);
+int			get_player_nbr(t_map map);
+void		ft_add_enemy(t_enemy **enemy, int x, int y);
 
 #endif
