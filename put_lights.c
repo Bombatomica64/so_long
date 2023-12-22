@@ -6,37 +6,12 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:15:06 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 16:59:35 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:20:24 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_put_light(t_datamap *data, t_enemy *enemy, int direction)
-{
-	if (direction == 1)
-	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->enemy.img, enemy->x, 
-			enemy->y - 32);
-		data->map.map[enemy->y / 32][enemy->x / 32] = 'L' ;
-	}
-	else if (direction == 2)
-	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->enemy.img, enemy->x - 32, enemy->y);
-		data->map.map[enemy->y / 32][enemy->x / 32] = 'L' ;
-	}
-	else if (direction == 3)
-	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->enemy.img, enemy->x, enemy->y + 32);
-		data->map.map[enemy->y / 32][enemy->x / 32] = 'L' ;
-	}
-	else if (direction == 4)
-	{
-		mlx_put_image_to_window(data->data.mlx, data->data.win, data->enemy.img, enemy->x + 32, enemy->y);
-		data->map.map[enemy->y / 32][enemy->x / 32] = 'L' ;
-	}
-	//ft_flood_light(enemy, rand)
-}
 
 void	ft_remove_light(t_datamap *data, t_enemy *enemy)
 {

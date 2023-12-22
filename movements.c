@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:49 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 17:10:14 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:22:15 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,26 @@ void	ft_print_map(t_map map)
 
 void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
 {
-	if (ft_check_block_e(data, data->enemy.x + dr_x, data->enemy.y + dr_y) == 0)
+	if (ft_check_block_e(data, data->enemies->x + dr_x,
+			data->enemies->y + dr_y) == 0)
 	{
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
-			img, data->enemy.x + dr_x, data->enemy.y + dr_y);
+			img, data->enemies->x + dr_x, data->enemies->y + dr_y);
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
-			data->black.img, data->enemy.x, data->enemy.y);
-		data->enemy.x += dr_x;
-		data->enemy.y += dr_y;
-		if (data->map.map[data->enemy.y / 32][data->enemy.x / 32] == '0')
+			data->black.img, data->enemies->x, data->enemies->y);
+		data->enemies->x += dr_x;
+		data->enemies->y += dr_y;
+		if (data->map.map[data->enemies->y / 32][data->enemies->x / 32] == '0')
 		{
-			data->map.map[data->enemy.y / 32][data->enemy.x / 32] = 'N';
-			if (data->map.map[data->enemy.y / 32 - dr_y / 32]
-				[data->enemy.x / 32 - dr_x / 32] != 'E' && data->map.map[data->enemy.y / 32 - dr_y / 32]
-				[data->enemy.x / 32 - dr_x / 32] != 'C')
-				data->map.map[data->enemy.y / 32 - dr_y / 32]
-				[data->enemy.x / 32 - dr_x / 32] = '0';
+			data->map.map[data->enemies->y / 32][data->enemies->x / 32] = 'N';
+			if (data->map.map[data->enemies->y / 32 - dr_y / 32]
+				[data->enemies->x / 32 - dr_x / 32] != 'E'
+				&& data->map.map[data->enemies->y / 32 - dr_y / 32]
+				[data->enemies->x / 32 - dr_x / 32] != 'C')
+				data->map.map[data->enemies->y / 32 - dr_y / 32]
+				[data->enemies->x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light(data, data->enemy.x - dr_x, data->enemy.y - dr_y, 1);
+		ft_flood_light(data, data->enemies->x - dr_x,
+			data->enemies->y - dr_y, 1);
 	}
-}
-{
-	"sss"
 }
