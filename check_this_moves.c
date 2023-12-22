@@ -6,7 +6,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:42:02 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/21 17:36:17 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/22 12:27:03 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_check_block(t_datamap *datamap, int x, int y)
 {
-	if (datamap->map.map[y / 32][x / 32] == '1' || datamap->map.map[y / 32][x / 32] == 'W')
+	if (datamap->map.map[y / 32][x / 32] == '1'
+		|| datamap->map.map[y / 32][x / 32] == 'W')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
 	{
@@ -25,6 +26,7 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
 		if (datamap->map.nb_c == 0)
 			ft_error_free(datamap);
+	datamap->moves_happened = 1;
 	return (0);
 }
 
@@ -44,6 +46,10 @@ int	ft_min(int a, int b)
 
 void	ft_1_to_w_recursive(t_datamap *datamap, int x, int y, int i, int j)
 {
+	if (j < 0)
+		j = 0;
+	if (i < 0)
+		i = 0;
 	if (j > y + 96 || j / 32 >= datamap->map.height)
 		return ;
 	if (i > x + 96 || i / 32 >= datamap->map.width)

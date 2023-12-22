@@ -20,9 +20,9 @@ void   ft_first_enemy(t_datamap *data)
 	}
 }
 
-int ft_random_number(void)
+int	ft_random_number(void)
 {
-    return (rand() % 4 + 1);
+	return (rand() % 4 + 1);
 }
 
 int ft_check_block_e(t_datamap *datamap, int x, int y)
