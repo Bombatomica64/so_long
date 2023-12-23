@@ -134,5 +134,6 @@ void		ft_print_map(t_map map);
 int			get_exits(t_map map);
 int			get_player_nbr(t_map map);
 void		ft_add_enemy(t_enemy **enemy, int x, int y);
+void		ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y);
 
 #endif
