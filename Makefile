@@ -1,12 +1,16 @@
+
 NAME = so_long
 
 MLX_DIR = ./minilibx
 MLX = $(MLX_DIR)/libmlx.a
 MLXFLAGS = -lX11 -lXext -lm
 
-CC = cc -Wall -Wextra -Werror
+CC = cc
 
-SRC = so_long.c put_images.c
+SRC = flood_fill.c  ft_error_free_map.c  ft_errors.c  \
+	map_check.c put_images.c  read_map.c  so_long.c \
+	bad_next_line.c get_entity.c check_this_moves.c \
+	enemy.c put_lights.c images.c movements.c 
 
 
 #OBJ = $(SRC:.c=.o)

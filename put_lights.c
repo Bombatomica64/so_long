@@ -83,6 +83,7 @@ void	ft_rem_lights(t_datamap *data, int x, int y, int offset)
 
 void	ft_flooding_light(t_datamap *data, int x, int y, int radius)
 {
+
 	int			map_x;
 	int			map_y;
 	t_image		**imgs;
