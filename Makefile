@@ -1,3 +1,4 @@
+
 NAME = so_long
 
 MLX_DIR = ./minilibx
