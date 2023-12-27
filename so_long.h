@@ -89,7 +89,6 @@ typedef struct s_datamap
 	char		*moves_str;
 }	t_datamap;
 
-
 t_map		get_map(char *filename);
 void		ft_error_free(t_datamap *data);
 void		ft_flood_fill(t_map *map, int y, int x);
@@ -122,7 +121,6 @@ int			ft_random_number(void);
 void		enemy_move(t_datamap *data);
 void		ft_flood_light(t_datamap *data, int x, int y, int radius);
 void		ft_rem_lights(t_datamap *data, int x, int y, int offset);
-void		ft_flooding_light(t_datamap *data, int x, int y, int radius);
 void		put_image_on_struct(t_datamap *datamap);
 void		ft_1_to_w(t_datamap *datamap, int x, int y);
 void		ft_printmoves(t_datamap *datamap);
@@ -137,6 +135,7 @@ int			get_exits(t_map map);
 int			get_player_nbr(t_map map);
 void		ft_add_enemy(t_enemy **enemy, int x, int y);
 void		ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y);
-
-
+void		ft_put_image(t_datamap *data, t_player pos, t_image **imgs, int radius);
+void		ft_flooding_light(t_datamap *data, t_player pos, t_image **imgs, int radius);
+void		ft_recursive_light(t_datamap *data, t_player pos, t_image **imgs, int radius);
 #endif

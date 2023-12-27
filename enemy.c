@@ -37,8 +37,6 @@ void	ft_add_enemy(t_enemy **enemy, int x, int y)
 		new_enemy->prev = temp;
 	}
 }
-
-
 /*void	ft_first_enemy(t_datamap *data)  da cancellare
 
 void	ft_first_enemy(t_datamap *data)
@@ -50,7 +48,6 @@ void	ft_first_enemy(t_datamap *data)
 	}
 
 }*/
-
 
 int	ft_random_number(void)
 {
@@ -71,16 +68,15 @@ void	ft_move_enemy(t_datamap *data, t_enemy *enemy, int dir, void *img)
 
 void	enemy_move(t_datamap *data)
 {
-	int	direction;
+	int			direction;
+	t_enemy		*first_enemy;
 
-
-	t_enemy *first_enemy = data->enemies; // per ritornare al primo nodo
-
+	first_enemy = data->enemies;
 	while (data->enemies)
 	{
 		direction = ft_random_number();
 		ft_move_enemy(data, data->enemies, direction, data->enemy.img);
 		data->enemies = data->enemies->next;
 	}
-	data->enemies = first_enemy; // bastano queste 2 righe
+	data->enemies = first_enemy;
 }

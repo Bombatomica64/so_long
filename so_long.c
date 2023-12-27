@@ -77,4 +77,3 @@ int	main(int argc, char **argv)
 	put_map(argv[1], &data);
 	return (0);
 }
-

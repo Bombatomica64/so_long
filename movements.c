@@ -32,7 +32,6 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		}
 		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
-
 }
 
 void	ft_printmoves(t_datamap *datamap)
