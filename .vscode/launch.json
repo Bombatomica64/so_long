@@ -7,9 +7,15 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
+<<<<<<< Updated upstream
       "externalConsole": false,
       "cwd": "/nfs/homes/mruggier/Desktop/so_long",
       "program": "/nfs/homes/mruggier/Desktop/so_long/build/Debug/outDebug",
+=======
+      "externalConsole": true,
+      "cwd": "//wsl.localhost/Ubuntu/home/marco/my_so_long/so_long",
+      "program": "//wsl.localhost/Ubuntu/home/marco/my_so_long/so_long/build/Debug/outDebug",
+>>>>>>> Stashed changes
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
