@@ -128,7 +128,6 @@ void	ft_flooding_light_w(t_datamap *data, int x, int y, int radius)
 {
 	int	map_x;
 	int	map_y;
-	printf("ciao?\n");
 	map_x = x / 32;
 	map_y = y / 32;
 	if (radius < 0 || x < 0 || y < 0 || x >= data->map.width * 32

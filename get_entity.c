@@ -117,6 +117,7 @@ t_enemy	*get_enemies(t_map map)
 		while (map.map[y][x])
 		{
 			if (map.map[y][x] == 'N')  //qui N non E
+
 				ft_add_enemy(&enemy, x, y);
 			x++;
 		}

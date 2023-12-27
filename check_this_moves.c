@@ -14,18 +14,19 @@
 
 int	ft_check_block(t_datamap *datamap, int x, int y)
 {
+
 	datamap->moves_happened = 1;
 	if (datamap->map.map[y / 32][x / 32] == '1'
 		|| datamap->map.map[y / 32][x / 32] == 'W')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
 	{
-		ft_print_map(datamap->map);
 		datamap->map.map[y / 32][x / 32] = '0';
 		datamap->map.nb_c--;
 		ft_1_to_w(datamap, x, y);
 	}
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
+
 	{
 		if (datamap->map.nb_c == 0)
 			ft_error_free(datamap);
