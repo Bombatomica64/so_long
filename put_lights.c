@@ -12,7 +12,6 @@
 
 #include "so_long.h"
 
-
 void	ft_remove_light(t_datamap *data, t_enemy *enemy)
 {
 	int	x;
@@ -84,9 +83,10 @@ void	ft_rem_lights(t_datamap *data, int x, int y, int offset)
 
 void	ft_flooding_light(t_datamap *data, int x, int y, int radius)
 {
-	int	map_x;
-	int	map_y;
-	t_image	**imgs;
+
+	int			map_x;
+	int			map_y;
+	t_image		**imgs;
 
 	map_x = x / 32;
 	map_y = y / 32;
@@ -128,6 +128,7 @@ void	ft_flooding_light_w(t_datamap *data, int x, int y, int radius)
 {
 	int	map_x;
 	int	map_y;
+
 	map_x = x / 32;
 	map_y = y / 32;
 	if (radius < 0 || x < 0 || y < 0 || x >= data->map.width * 32

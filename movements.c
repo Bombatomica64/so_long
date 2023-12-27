@@ -63,6 +63,7 @@ void	ft_print_map(t_map map)
 			x++;
 		}
 		ft_printf("\n");
+
 		y++;
 	}
 }

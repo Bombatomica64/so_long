@@ -7,7 +7,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 17:42:54 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:13:14 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_datamap
 	char		*moves_str;
 }	t_datamap;
 
+
 t_map		get_map(char *filename);
 void		ft_error_free(t_datamap *data);
 void		ft_flood_fill(t_map *map, int y, int x);
@@ -136,5 +137,6 @@ int			get_exits(t_map map);
 int			get_player_nbr(t_map map);
 void		ft_add_enemy(t_enemy **enemy, int x, int y);
 void		ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y);
+
 
 #endif
