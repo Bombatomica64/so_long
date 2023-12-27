@@ -12,34 +12,41 @@
 
 #include "so_long.h"
 
-void	ft_error_free(t_datamap *data)
+void	ft_destroy_images(t_datamap *data)
 {
-	if (data->tile.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->tile.img);
-	if (data->tile25.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->tile25.img);
-	if (data->tile50.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->tile50.img);
-	if (data->tile75.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->tile75.img);
-	if (data->babbo.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->babbo.img);
-	if (data->wall.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->wall.img);
-	if (data->wall_light.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->wall_light.img);
-	if (data->enemy.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->enemy.img);
-	if (data->exit.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->exit.img);
-	if (data->collectible.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->collectible.img);
-	if (data->black.img != NULL)
-		mlx_destroy_image(data->data.mlx, data->black.img);
+	t_image		*imgs[11];
+	int			i;
+
+	imgs[0] = &data->tile;
+	imgs[1] = &data->tile25;
+	imgs[2] = &data->tile50;
+	imgs[3] = &data->tile75;
+	imgs[4] = &data->babbo;
+	imgs[5] = &data->wall;
+	imgs[6] = &data->wall_light;
+	imgs[7] = &data->enemy;
+	imgs[8] = &data->exit;
+	imgs[9] = &data->collectible;
+	imgs[10] = &data->black;
+	i = 0;
+	while (i < sizeof(imgs) / sizeof(t_image *))
+	{
+		if (imgs[i]->img != NULL)
+			mlx_destroy_image(data->data.mlx, imgs[i]->img);
+		i++;
+	}
+}
+
+void	ft_free_map_and_enemies(t_datamap *data)
+{
 	if (data->map.map != NULL)
 		free_matrix(data->map.map);
 	if (data->enemies != NULL)
 		ft_free_enemy(data);
+}
+
+void	ft_free_moves_and_mlx(t_datamap *data)
+{
 	if (data->moves_str != NULL)
 		free(data->moves_str);
 	if (data->data.mlx != NULL)
@@ -49,7 +56,6 @@ void	ft_error_free(t_datamap *data)
 		mlx_destroy_display(data->data.mlx);
 		free(data->data.mlx);
 	}
-	exit(0);
 }
 
 void	free_matrix(char **matrix)

@@ -25,9 +25,7 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 		ft_1_to_w(datamap, x, y);
 	}
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
-	{
 		ft_error_free(datamap);
-	}
 	else if (datamap->map.map[y / 32][x / 32] == 'N')
 	{
 		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
