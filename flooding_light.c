@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:44:25 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/28 15:05:58 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:19:36 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,16 @@ void	ft_recursive_light(t_datamap *data, t_player pos,
 
 	new_pos.x = pos.x + 32;
 	new_pos.y = pos.y;
-	if (new_pos.x < data->map.width * 32 && new_pos.y < data->map.height * 32 && new_pos.x >= 0 && new_pos.y >= 0 && data->map.map[new_pos.y / 32][new_pos.x / 32] != 'N')
-		ft_flooding_light(data, new_pos, imgs, radius - 1);
+	ft_flooding_light(data, new_pos, imgs, radius - 1);
 	new_pos.x = pos.x - 32;
 	new_pos.y = pos.y;
-	if (new_pos.x < data->map.width * 32 && new_pos.y < data->map.height * 32 && new_pos.x >= 0 && new_pos.y >= 0 && data->map.map[new_pos.y / 32][new_pos.x / 32] != 'N')
-		ft_flooding_light(data, new_pos, imgs, radius - 1);
+	ft_flooding_light(data, new_pos, imgs, radius - 1);
 	new_pos.x = pos.x;
 	new_pos.y = pos.y + 32;
-	if (new_pos.x < data->map.width * 32 && new_pos.y < data->map.height * 32 && new_pos.x >= 0 && new_pos.y >= 0 && data->map.map[new_pos.y / 32][new_pos.x / 32] != 'N')
-		ft_flooding_light(data, new_pos, imgs, radius - 1);
+	ft_flooding_light(data, new_pos, imgs, radius - 1);
 	new_pos.x = pos.x;
 	new_pos.y = pos.y - 32;
-	if (new_pos.x < data->map.width * 32 && new_pos.y < data->map.height * 32 && new_pos.x >= 0 && new_pos.y >= 0 && data->map.map[new_pos.y / 32][new_pos.x / 32] != 'N')
-		ft_flooding_light(data, new_pos, imgs, radius - 1);
+	ft_flooding_light(data, new_pos, imgs, radius - 1);
 }
 
 void	ft_flooding_light(t_datamap *data, t_player pos,

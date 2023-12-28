@@ -77,6 +77,8 @@ void	ft_free_enemy(t_datamap *data)
 {
 	t_enemy	*tmp;
 
+	while (data->enemies->prev)
+		data->enemies = data->enemies->prev;
 	while (data->enemies)
 	{
 		tmp = data->enemies;

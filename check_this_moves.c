@@ -24,8 +24,6 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 		datamap->map.nb_c--;
 		ft_1_to_w(datamap, x, y);
 	}
-	else if (datamap->map.map[y / 32][x / 32] == 'E')
-		ft_error_free(datamap);
 	else if (datamap->map.map[y / 32][x / 32] == 'N')
 	{
 		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
@@ -35,6 +33,10 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 	}
 	else if (datamap->map.map[y / 32][x / 32] == '0')
 		return (0);
+	else if (datamap->map.map[y / 32][x / 32] == 'E')
+		if (datamap->map.nb_c == 0)
+			ft_error_free(datamap);
+	ft_print_map(datamap->map);
 	return (0);
 }
 

@@ -62,7 +62,6 @@ void	ft_print_map(t_map map)
 			x++;
 		}
 		ft_printf("\n");
-
 		y++;
 	}
 }
@@ -88,7 +87,6 @@ void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->enemies->y / 32 - dr_y / 32]
 				[data->enemies->x / 32 - dr_x / 32] = '0';
 		}
-		ft_print_map(data->map);
 		ft_flood_light_e(data, data->enemies->x,
 			data->enemies->y, 2);
 	}
