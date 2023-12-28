@@ -7,7 +7,7 @@
 /*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 17:42:54 by lmicheli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:13:14 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ typedef struct s_datamap
 	char		*moves_str;
 }	t_datamap;
 
+void		ft_flood_light_e(t_datamap *data, int x, int y, int radius);
 t_map		get_map(char *filename);
-void		ft_error_free(t_datamap *data);
 void		ft_flood_fill(t_map *map, int y, int x);
 void		*put_xmp(void *mlx, char *filename, int *width, int *height);
-void		free_matrix(char **matrix);
 int			put_map(char *filename, t_datamap *data);
 int			wrong_letters_in_map(int fd);
 int			map_checker(char *filename);
@@ -112,7 +111,8 @@ int			ft_check_block(t_datamap *datamap, int x, int y);
 int			get_collectibles(t_map map);
 void		ft_move(t_datamap *datamap, int axis, int direction);
 void		ft_first_enemy(t_datamap *data);
-void		ft_move_enemy(t_datamap *datamap, t_enemy *enemy, int direction, void *enemy_img);
+void		ft_move_enemy(t_datamap *datamap, t_enemy *enemy,
+				int direction, void *enemy_img);
 void		ft_put_light(t_datamap *data, t_enemy *enemy, int direction);
 void		ft_remove_light(t_datamap *data, t_enemy *enemy);
 t_enemy		*get_enemies(t_map map);
@@ -121,7 +121,6 @@ int			ft_random_number(void);
 void		enemy_move(t_datamap *data);
 void		ft_flood_light(t_datamap *data, int x, int y, int radius);
 void		ft_rem_lights(t_datamap *data, int x, int y, int offset);
-void		ft_flooding_light(t_datamap *data, int x, int y, int radius);
 void		put_image_on_struct(t_datamap *datamap);
 void		ft_1_to_w(t_datamap *datamap, int x, int y);
 void		ft_printmoves(t_datamap *datamap);
@@ -130,11 +129,22 @@ int			ft_min(int a, int b);
 void		ft_flooding_light_w(t_datamap *data, int x, int y, int radius);
 char		*ft_strjoin2(char *old_str, char *buf);
 void		movement_player(t_datamap *data, void *img, int dr_x, int dr_y);
-void		ft_free_enemy(t_datamap *data);
 void		ft_print_map(t_map map);
 int			get_exits(t_map map);
 int			get_player_nbr(t_map map);
 void		ft_add_enemy(t_enemy **enemy, int x, int y);
 void		ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y);
+void		ft_put_image(t_datamap *data, t_player pos,
+				t_image **imgs, int radius);
+void		ft_flooding_light(t_datamap *data, t_player pos,
+				t_image **imgs, int radius);
+void		ft_recursive_light(t_datamap *data, t_player pos, t_image **imgs,
+				int radius);
+void		ft_free_enemy(t_datamap *data);
+void		free_matrix(char **matrix);
+void		ft_error_free(t_datamap *data);
+void		ft_free_map_and_enemies(t_datamap *map);
+void		ft_destroy_images(t_datamap *data);
+void		ft_free_moves_and_mlx(t_datamap *data);
 
 #endif

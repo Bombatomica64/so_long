@@ -39,6 +39,7 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 
 int	on_keypress(int keysym, t_datamap *datamap)
 {
+	enemy_move(datamap);
 	if (keysym == 119)
 		ft_move(datamap, 'y', -32);
 	else if (keysym == 97)
@@ -49,7 +50,6 @@ int	on_keypress(int keysym, t_datamap *datamap)
 		ft_move(datamap, 'x', 32);
 	else if (keysym == 65307)
 		ft_error_free(datamap);
-	enemy_move(datamap);
 	if (datamap->moves_happened == 1)
 	{
 		datamap->moves++;
@@ -77,4 +77,3 @@ int	main(int argc, char **argv)
 	put_map(argv[1], &data);
 	return (0);
 }
-

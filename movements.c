@@ -32,7 +32,6 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		}
 		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
-
 }
 
 void	ft_printmoves(t_datamap *datamap)
@@ -63,6 +62,7 @@ void	ft_print_map(t_map map)
 			x++;
 		}
 		ft_printf("\n");
+
 		y++;
 	}
 }
@@ -88,7 +88,8 @@ void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->enemies->y / 32 - dr_y / 32]
 				[data->enemies->x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light(data, data->enemies->x - dr_x,
-			data->enemies->y - dr_y, 1);
+		ft_print_map(data->map);
+		ft_flood_light_e(data, data->enemies->x,
+			data->enemies->y, 2);
 	}
 }
