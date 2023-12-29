@@ -32,6 +32,11 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		}
 		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
+	else if (ft_check_block(data, data->player.x + dr_x,
+			data->player.y + dr_y) == 2)
+	{
+		ft_crash_animation(data, data->player.x, data->player.y);
+	}
 }
 
 void	ft_printmoves(t_datamap *datamap)

@@ -14,7 +14,7 @@
 
 void	ft_destroy_images(t_datamap *data)
 {
-	t_image		*imgs[11];
+	t_image		*imgs[13];
 	int			i;
 
 	imgs[0] = &data->tile;
@@ -28,6 +28,8 @@ void	ft_destroy_images(t_datamap *data)
 	imgs[8] = &data->exit;
 	imgs[9] = &data->collectible;
 	imgs[10] = &data->black;
+	imgs[11] = &data->babbo1;
+	imgs[12] = &data->babbo2;
 	i = 0;
 	while (i < sizeof(imgs) / sizeof(t_image *))
 	{

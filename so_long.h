@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/28 17:11:28 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:08:23 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ typedef struct s_map
 	int		nb_e;
 	int		nb_p;
 	int		nb_n;
+	int		x;
+	int		y;
 }	t_map;
+
 typedef struct s_player
 {
 	int		x;
@@ -81,6 +84,8 @@ typedef struct s_datamap
 	t_image		exit;
 	t_image		collectible;
 	t_image		black;
+	t_image		babbo1;
+	t_image		babbo2;
 	t_enemy		*enemies;
 	t_player	player;
 	int			moves;
@@ -88,6 +93,12 @@ typedef struct s_datamap
 	char		*moves_str;
 }	t_datamap;
 
+void		got_a_exit(t_datamap *datamap, int x, int y);
+void		got_a_enemy(t_datamap *datamap, int x, int y);
+void		got_a_collectable(t_datamap *datamap, int x, int y);
+void		coordinates_exit(t_datamap *data);
+void		ft_more_images(t_datamap *data);
+void		ft_crash_animation(t_datamap *datamap, int x, int y);
 void		ft_flood_light_e(t_datamap *data, int x, int y, int radius);
 t_map		get_map(char *filename);
 void		ft_flood_fill(t_map *map, int y, int x);
