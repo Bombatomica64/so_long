@@ -64,6 +64,9 @@ void	ft_move_enemy(t_datamap *data, t_enemy *enemy, int dir, void *img)
 		ft_movement_e(data, img, 0, 32);
 	else if (dir == 4)
 		ft_movement_e(data, img, 32, 0);
+	if (data->map.nb_c == 0)
+		mlx_put_image_to_window(data->data.mlx, data->data.win,
+			data->exit.img, data->map.x, data->map.y);
 }
 
 void	enemy_move(t_datamap *data)
@@ -71,7 +74,15 @@ void	enemy_move(t_datamap *data)
 	int			direction;
 	t_enemy		*first_enemy;
 
+	while (data->enemies->prev)
+		data->enemies = data->enemies->prev;
 	first_enemy = data->enemies;
+	while (data->enemies)
+	{
+		ft_rem_lights(data, data->enemies->x, data->enemies->y, 3);
+		data->enemies = data->enemies->next;
+	}
+	data->enemies = first_enemy;
 	while (data->enemies)
 	{
 		direction = ft_random_number();
@@ -80,3 +91,9 @@ void	enemy_move(t_datamap *data)
 	}
 	data->enemies = first_enemy;
 }
+/*
+while (datamap->enemies->next)
+	{
+		ft_rem_lights(datamap, datamap->enemies->x, datamap->enemies->y, 2);
+		datamap->enemies = datamap->enemies->next;
+	}*/

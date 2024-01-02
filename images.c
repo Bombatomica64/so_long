@@ -47,4 +47,10 @@ void	ft_more_images(t_datamap *data)
 			"assets/babbo1.xpm", &data->babbo1.width, &data->babbo1.height);
 	data->babbo2.img = put_xmp(data->data.mlx,
 			"assets/babbo2.xpm", &data->babbo2.width, &data->babbo2.height);
+	data->start1.img = put_xmp(data->data.mlx,
+			"assets/start1.xpm", &data->start1.width, &data->start1.height);
+	data->start2.img = put_xmp(data->data.mlx,
+			"assets/start2.xpm", &data->start2.width, &data->start2.height);
+	data->end.img = put_xmp(data->data.mlx,
+			"assets/end.xpm", &data->end.width, &data->end.height);
 }

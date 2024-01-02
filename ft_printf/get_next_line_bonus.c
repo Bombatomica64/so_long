@@ -51,24 +51,3 @@ char	*get_next_line(int fd)
 	old_str[fd] = ft_resto(old_str[fd]);
 	return (line);
 }
-
-/*
-int	main(void)
-{
-	int		fd;
-
-	fd = open("text.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		return (0);
-	}
-
-		printf("%s\n", get_next_line(fd));
-		printf("%s\n", get_next_line(fd));
-		printf("%s\n", get_next_line(fd));
-		printf("%s\n", get_next_line(fd));
-		printf("%s\n", get_next_line(fd));
-		printf("%s\n", get_next_line(fd));
-	close(fd);
-	return (0);
-}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flooding_light.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:44:25 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/28 17:19:36 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:00:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_flood_light(t_datamap *data, int x, int y, int radius)
 	imgs[0] = &data->tile25;
 	imgs[1] = &data->tile50;
 	imgs[2] = &data->tile75;
-	ft_rem_lights(data, x, y, radius + 1);
 	player.x = data->player.x;
 	player.y = data->player.y;
 	ft_flooding_light(data, player, imgs, radius);
@@ -100,7 +99,6 @@ void	ft_flood_light_e(t_datamap *data, int x, int y, int radius)
 	imgs[0] = &data->tile25;
 	imgs[1] = &data->tile50;
 	imgs[2] = &data->tile75;
-	ft_rem_lights(data, x, y, radius + 1);
 	enemy.x = x;
 	enemy.y = y;
 	ft_flooding_light(data, enemy, imgs, radius);

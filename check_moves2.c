@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_moves2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:13:47 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/29 18:14:26 by mruggier         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:36:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_min(int a, int b)
 	return (b);
 }
 
-void	ft_1_to_w(t_datamap *datamap, int x, int y)
+void	ft_1_to_w(t_datamap *data, int x, int y)
 {
 	int		i;
 	int		j;
@@ -37,15 +37,15 @@ void	ft_1_to_w(t_datamap *datamap, int x, int y)
 		j = 0;
 	if (i < 0)
 		i = 0;
-	while (y + 128 > j && j / 32 < datamap->map.height)
+	while (y + 128 > j && j / 32 < data->map.height)
 	{
-		while (x + 128 > i && i / 32 < datamap->map.width)
+		while (x + 128 > i && i / 32 < data->map.width)
 		{
-			if (datamap->map.map[j / 32][i / 32] == '1')
+			if (data->map.map[j / 32][i / 32] == '1')
 			{
-				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->wall_light.img, i, j);
-				datamap->map.map[j / 32][i / 32] = 'W';
+				mlx_put_image_to_window(data->data.mlx, data->data.win,
+					data->wall_light.img, i, j);
+				data->map.map[j / 32][i / 32] = 'W';
 			}
 			i += 32;
 		}

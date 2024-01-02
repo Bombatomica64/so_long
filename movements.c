@@ -14,8 +14,13 @@
 
 void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 {
-	if (ft_check_block(data, data->player.x + dr_x, data->player.y + dr_y) == 0)
+	int	a;
+
+	a = ft_check_block(data, data->player.x + dr_x, data->player.y + dr_y);
+	if (a == 0)
 	{
+		data->moves_happened = 1;
+		ft_rem_lights(data, data->player.x, data->player.y, 3);
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
 			img, data->player.x + dr_x, data->player.y + dr_y);
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
@@ -32,11 +37,8 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		}
 		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
-	else if (ft_check_block(data, data->player.x + dr_x,
-			data->player.y + dr_y) == 2)
-	{
+	else if (a == 1)
 		ft_crash_animation(data, data->player.x, data->player.y);
-	}
 }
 
 void	ft_printmoves(t_datamap *datamap)
@@ -92,7 +94,6 @@ void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->enemies->y / 32 - dr_y / 32]
 				[data->enemies->x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light_e(data, data->enemies->x,
-			data->enemies->y, 2);
 	}
+	ft_flood_light_e(data, data->enemies->x, data->enemies->y, 2);
 }

@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/29 18:08:23 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:27:52 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,20 @@ typedef struct s_datamap
 	t_image		black;
 	t_image		babbo1;
 	t_image		babbo2;
+	t_image		start1;
+	t_image		start2;
+	t_image		end;
 	t_enemy		*enemies;
 	t_player	player;
 	int			moves;
 	int			moves_happened;
 	char		*moves_str;
+	int			i;
+	int			clicked;
+	int			released;
 }	t_datamap;
 
+void		ft_key_input(t_datamap *data);
 void		got_a_exit(t_datamap *datamap, int x, int y);
 void		got_a_enemy(t_datamap *datamap, int x, int y);
 void		got_a_collectable(t_datamap *datamap, int x, int y);

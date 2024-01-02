@@ -109,8 +109,14 @@ void	ft_put_tile(t_datamap *data, t_map map)
 
 int	put_map(char *filename, t_datamap *data)
 {
+	data->clicked = 0;
+	data->released = 0;
 	if (map_checker(filename) == 0)
-		ft_error_free(data);
+	{
+		ft_destroy_images(data);
+		ft_free_moves_and_mlx(data);
+		exit(0);
+	}
 	data->map = get_map(filename);
 	data->player = get_player(data->map);
 	data->enemies = get_enemies(data->map);
@@ -118,25 +124,8 @@ int	put_map(char *filename, t_datamap *data)
 		ft_error_free(data);
 	data->data.win = mlx_new_window(data->data.mlx, data->map.width * 32,
 			(data->map.height * 32) + 64, "so_long");
-	ft_put_tile(data, data->map);
-	ft_print_map(data->map);
-	mlx_hook(data->data.win, KeyRelease, KeyReleaseMask,
-		&on_keypress, &data->data);
-	mlx_hook(data->data.win, DestroyNotify, StructureNotifyMask,
-		&on_destroy, data);
-	mlx_loop(data->data.mlx);
+	mlx_put_image_to_window(data->data.mlx, data->data.win,
+		data->start1.img, 0, 0);
+	ft_key_input(data);
 	return (0);
 }
-
-/* 	y = 0;
-	while (map.map[y])
-	{
-		x = 0;
-		while (map.map[y][x])
-		{
-			printf("%c", map.map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	} */
