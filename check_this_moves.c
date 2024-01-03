@@ -32,7 +32,6 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 		datamap->moves_happened = 0;
 		return (1);
 	}
-	ft_print_map(datamap->map);
 	return (0);
 }
 

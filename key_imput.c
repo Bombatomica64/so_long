@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:19:31 by mruggier          #+#    #+#             */
-/*   Updated: 2024/01/02 16:27:27 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:56:07 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int	on_mouserelease(int button, int x, int y, t_datamap *data)
 		while (i++ < 1000)
 			mlx_put_image_to_window(data->data.mlx, data->data.win,
 				data->start1.img, 0, 0);
-		ft_put_tile(data, data->map);
 		mlx_hook(data->data.win, KeyRelease, KeyReleaseMask,
 			&on_keypress, &data->data);
 		mlx_hook(data->data.win, DestroyNotify, StructureNotifyMask,
 			&on_destroy, data);
+		ft_put_tile(data, data->map);
+		ft_flood_light(data, data->player.x, data->player.y, 3);
 		mlx_loop(data->data.mlx);
 	}
 	return (0);

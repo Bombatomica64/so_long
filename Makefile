@@ -14,25 +14,26 @@ SRC = flood_fill.c  ft_error_free.c  ft_errors.c  \
 	flooding_light.c frees.c check_moves2.c animations_bonus.c
 
 
-#OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 FT_PRINTF = ft_printf
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	@make all -C $(FT_PRINTF)
 	@make all -C $(MLX_DIR)
-	@$(CC) $(SRC) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(OBJ) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "Compiled "$(NAME)" successfully!"
 
-#%.o: %.c \
+%.o: %.c
 	@$(CC) -c $< -o $@
 
 bonus : re
 
 clean:
 	@make clean -C $(FT_PRINTF)
+	@rm -f $(OBJ)
 	@echo "Cleaned objects successfully!"
 	
 fclean: clean
@@ -43,6 +44,9 @@ fclean: clean
 	
 re: fclean all
 	make re -C $(FT_PRINTF)
+
+val:
+	valgrind --leak-check=full --show-leak-kinds=all ./so_long $(file)
 
 replay:
 	@rm -f $(NAME)

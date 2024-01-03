@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_moves2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:13:47 by mruggier          #+#    #+#             */
-/*   Updated: 2023/12/30 22:36:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/03 12:20:19 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void	ft_1_to_w(t_datamap *data, int x, int y)
 	int		i;
 	int		j;
 
-	i = x - 128;
-	j = y - 128;
+	i = x - 256;
+	j = y - 256;
 	if (j < 0)
 		j = 0;
 	if (i < 0)
 		i = 0;
-	while (y + 128 > j && j / 32 < data->map.height)
+	while (y + 256 > j && j / 32 < data->map.height)
 	{
-		while (x + 128 > i && i / 32 < data->map.width)
+		while (x + 256 > i && i / 32 < data->map.width)
 		{
 			if (data->map.map[j / 32][i / 32] == '1')
 			{
@@ -49,7 +49,7 @@ void	ft_1_to_w(t_datamap *data, int x, int y)
 			}
 			i += 32;
 		}
-		i = x - 128;
+		i = x - 256;
 		j += 32;
 	}
 }
