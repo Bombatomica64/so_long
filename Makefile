@@ -29,7 +29,7 @@ $(NAME): $(OBJ)
 %.o: %.c
 	@$(CC) -c $< -o $@
 
-bonus : re
+bonus : all
 
 clean:
 	@make clean -C $(FT_PRINTF)
