@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flooding_light.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:44:25 by lmicheli          #+#    #+#             */
-/*   Updated: 2024/01/03 12:49:36 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:08:09 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_flooding_light(t_datamap *data, t_player pos,
 	ft_recursive_light(data, pos, imgs, radius);
 }
 
-void	ft_flood_light(t_datamap *data, int x, int y, int radius)
+void	ft_flood_light(t_datamap *data, int radius)
 {
 	t_image		**imgs;
 	t_player	player;

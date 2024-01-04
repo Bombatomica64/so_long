@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2024/01/02 16:27:52 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:08:27 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_datamap
 }	t_datamap;
 
 void		ft_key_input(t_datamap *data);
-void		got_a_exit(t_datamap *datamap, int x, int y);
+void		got_a_exit(t_datamap *datamap);
 void		got_a_enemy(t_datamap *datamap, int x, int y);
 void		got_a_collectable(t_datamap *datamap, int x, int y);
 void		coordinates_exit(t_datamap *data);
@@ -128,15 +128,14 @@ int			ft_check_block(t_datamap *datamap, int x, int y);
 int			get_collectibles(t_map map);
 void		ft_move(t_datamap *datamap, int axis, int direction);
 void		ft_first_enemy(t_datamap *data);
-void		ft_move_enemy(t_datamap *datamap, t_enemy *enemy,
-				int direction, void *enemy_img);
+void		ft_move_enemy(t_datamap *datamap, int direction, void *enemy_img);
 void		ft_put_light(t_datamap *data, t_enemy *enemy, int direction);
 void		ft_remove_light(t_datamap *data, t_enemy *enemy);
 t_enemy		*get_enemies(t_map map);
 int			ft_check_block_e(t_datamap *datamap, int x, int y);
 int			ft_random_number(void);
 void		enemy_move(t_datamap *data);
-void		ft_flood_light(t_datamap *data, int x, int y, int radius);
+void		ft_flood_light(t_datamap *data, int radius);
 void		ft_rem_lights(t_datamap *data, int x, int y, int offset);
 void		put_image_on_struct(t_datamap *datamap);
 void		ft_1_to_w(t_datamap *datamap, int x, int y);

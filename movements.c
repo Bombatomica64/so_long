@@ -35,7 +35,7 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->player.y / 32 - dr_y / 32]
 				[data->player.x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
+		ft_flood_light(data, 3);
 	}
 	else if (a == 1)
 		ft_crash_animation(data, data->player.x, data->player.y);

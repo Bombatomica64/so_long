@@ -14,8 +14,8 @@
 
 void	ft_destroy_images(t_datamap *data)
 {
-	t_image		*imgs[16];
-	int			i;
+	t_image				*imgs[16];
+	unsigned int		i;
 
 	imgs[0] = &data->tile;
 	imgs[1] = &data->tile25;
