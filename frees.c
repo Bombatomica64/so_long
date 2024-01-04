@@ -14,7 +14,7 @@
 
 void	ft_destroy_images(t_datamap *data)
 {
-	t_image		*imgs[11];
+	t_image		*imgs[16];
 	int			i;
 
 	imgs[0] = &data->tile;
@@ -28,12 +28,16 @@ void	ft_destroy_images(t_datamap *data)
 	imgs[8] = &data->exit;
 	imgs[9] = &data->collectible;
 	imgs[10] = &data->black;
+	imgs[11] = &data->babbo1;
+	imgs[12] = &data->babbo2;
+	imgs[13] = &data->start1;
+	imgs[14] = &data->start2;
+	imgs[15] = &data->end;
 	i = 0;
 	while (i < sizeof(imgs) / sizeof(t_image *))
 	{
 		if (imgs[i]->img != NULL)
-			mlx_destroy_image(data->data.mlx, imgs[i]->img);
-		i++;
+			mlx_destroy_image(data->data.mlx, imgs[i++]->img);
 	}
 }
 
@@ -77,6 +81,8 @@ void	ft_free_enemy(t_datamap *data)
 {
 	t_enemy	*tmp;
 
+	while (data->enemies->prev)
+		data->enemies = data->enemies->prev;
 	while (data->enemies)
 	{
 		tmp = data->enemies;

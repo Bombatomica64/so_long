@@ -45,7 +45,7 @@ void	ft_remove_light(t_datamap *data, t_enemy *enemy)
 	}
 } */
 
-void	ft_process_columns(t_datamap *data, int x, int y, int offset, int i)
+void	ft_process_columns(t_datamap *data, int x, int y, int offset)
 {
 	int	j;
 
@@ -57,37 +57,35 @@ void	ft_process_columns(t_datamap *data, int x, int y, int offset, int i)
 			j++;
 			continue ;
 		}
-		if (data->map.map[i][j] == '0')
+		if (data->map.map[data->i][j] == '0')
 		{
 			mlx_put_image_to_window(data->data.mlx, data->data.win,
-				data->black.img, j * 32, i * 32);
-			data->map.map[i][j] = '0';
+				data->black.img, j * 32, data->i * 32);
+			data->map.map[data->i][j] = '0';
 		}
-		if (data->map.map[i][j] == '1' || data->map.map[i][j] == 'E'
-			|| data->map.map[i][j] == 'C')
+		if (data->map.map[data->i][j] == '1' || data->map.map[data->i][j] == 'E'
+			|| data->map.map[data->i][j] == 'C')
 			mlx_put_image_to_window(data->data.mlx, data->data.win,
-				data->black.img, j * 32, i * 32);
-		if (data->map.map[i][j] == 'W')
+				data->black.img, j * 32, data->i * 32);
+		if (data->map.map[data->i][j] == 'W')
 			mlx_put_image_to_window(data->data.mlx, data->data.win,
-				data->wall_light.img, j * 32, i * 32);
+				data->wall_light.img, j * 32, data->i * 32);
 		j++;
 	}
 }
 
 void	ft_rem_lights(t_datamap *data, int x, int y, int offset)
 {
-	int		i;
-
-	i = (y / 32) - offset;
-	while (i <= (y / 32) + offset)
+	data->i = (y / 32) - offset;
+	while (data->i <= (y / 32) + offset)
 	{
-		if (i < 0 || i >= data->map.height)
+		if (data->i < 0 || data->i >= data->map.height)
 		{
-			i++;
+			data->i++;
 			continue ;
 		}
-		ft_process_columns(data, x, y, offset, i);
-		i++;
+		ft_process_columns(data, x, y, offset);
+		data->i++;
 	}
 }
 

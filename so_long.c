@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -35,28 +34,24 @@ void	ft_move(t_datamap *datamap, int axis, int direction)
 		else if (axis == 120)
 			movement_player(datamap, datamap->babbo.img, 32, 0);
 	}
+	if (datamap->map.nb_c == 0)
+		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+			datamap->exit.img, datamap->map.x, datamap->map.y);
 }
 
-int	on_keypress(int keysym, t_datamap *datamap)
+void	ft_check_name(char *filename)
 {
-	if (keysym == 119)
-		ft_move(datamap, 'y', -32);
-	else if (keysym == 97)
-		ft_move(datamap, 'x', -32);
-	else if (keysym == 115)
-		ft_move(datamap, 'y', 32);
-	else if (keysym == 100)
-		ft_move(datamap, 'x', 32);
-	else if (keysym == 65307)
-		ft_error_free(datamap);
-	enemy_move(datamap);
-	if (datamap->moves_happened == 1)
+	int	i;
+
+	i = 0;
+	while (filename[i])
+		i++;
+	if (filename[i - 1] != 'r' || filename[i - 2] != 'e'
+		|| filename[i - 3] != 'b' || filename[i - 4] != '.')
 	{
-		datamap->moves++;
-		ft_printmoves(datamap);
-		datamap->moves_happened = 0;
+		ft_printf("Error: wrong file name\n");
+		exit(0);
 	}
-	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -65,6 +60,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (write(2, "Error: wrong number of arguments\n", 33));
+	ft_check_name(argv[1]);
 	data.data.mlx = mlx_init();
 	if (!data.data.mlx)
 		return (-1);

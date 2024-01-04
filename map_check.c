@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:55:35 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/22 14:53:23 by lmicheli         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:07:40 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +18,14 @@ int	map_checker(char *filename)
 	int		retval;
 
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (fd <= 0)
 		return (0);
 	retval = wrong_letters_in_map(fd);
 	close(fd);
 	if (retval == 0)
 	{
 		write(2, "Error Wrong letters in map\n", 27);
-		return (retval);
+		return (0);
 	}
 	fd = open(filename, O_RDONLY);
 	retval = map_is_rectangular(fd, retval);
@@ -43,7 +42,9 @@ int	wrong_letters_in_map(int fd)
 {
 	t_line	line;
 	char	c;
+	int		wrongletter;
 
+	wrongletter = 0;
 	c = 0;
 	line.read_bytes = 1;
 	while (line.read_bytes > 0)
@@ -56,14 +57,13 @@ int	wrong_letters_in_map(int fd)
 			c = line.line[line.i];
 			if (c != '1' && c != '0' && c != 'N' && c != 'C'
 				&& c != 'E' && c != 'P')
-			{
-				free(line.line);
-				return (0);
-			}
+				wrongletter = 1;
 			line.i++;
 		}
 		free(line.line);
 	}
+	if (wrongletter == 1)
+		return (0);
 	return (1);
 }
 

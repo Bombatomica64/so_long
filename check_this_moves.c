@@ -14,89 +14,78 @@
 
 int	ft_check_block(t_datamap *datamap, int x, int y)
 {
-	datamap->moves_happened = 1;
 	if (datamap->map.map[y / 32][x / 32] == '1'
 		|| datamap->map.map[y / 32][x / 32] == 'W')
+	{
+		datamap->moves_happened = 0;
 		return (1);
+	}
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
-	{
-		datamap->map.map[y / 32][x / 32] = '0';
-		datamap->map.nb_c--;
-		ft_1_to_w(datamap, x, y);
-	}
-	else if (datamap->map.map[y / 32][x / 32] == 'E')
-		ft_error_free(datamap);
+		got_a_collectable(datamap, x, y);
 	else if (datamap->map.map[y / 32][x / 32] == 'N')
-	{
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-			datamap->enemy.img, x, y);
-		ft_printf("You lose\n");
-		ft_error_free(datamap);
-	}
+		got_a_enemy(datamap, x, y);
 	else if (datamap->map.map[y / 32][x / 32] == '0')
 		return (0);
+	else if (datamap->map.map[y / 32][x / 32] == 'E')
+	{
+		got_a_exit(datamap, x, y);
+		datamap->moves_happened = 0;
+		return (1);
+	}
 	return (0);
+}
+
+void	got_a_exit(t_datamap *datamap, int x, int y)
+{
+	if (datamap->map.nb_c == 0)
+	{
+		ft_error_free(datamap);
+		ft_printf("You win\n");
+	}
+}
+
+void	got_a_enemy(t_datamap *datamap, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+		datamap->enemy.img, x, y);
+	while (i++ < 3200)
+	{
+		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+			datamap->end.img, 0, 0);
+	}
+	ft_printf("You lose\n");
+	ft_error_free(datamap);
+}
+
+void	got_a_collectable(t_datamap *datamap, int x, int y)
+{
+	datamap->map.map[y / 32][x / 32] = '0';
+	datamap->map.nb_c--;
+	if (datamap->map.nb_c == 0)
+	{
+		coordinates_exit(datamap);
+		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
+			datamap->exit.img, datamap->map.x, datamap->map.y);
+	}
+	ft_1_to_w(datamap, x, y);
 }
 
 int	ft_check_block_e(t_datamap *datamap, int x, int y)
 {
 	if (datamap->map.map[y / 32][x / 32] == '1'
-		|| datamap->map.map[y / 32][x / 32] == 'W')
+		|| datamap->map.map[y / 32][x / 32] == 'W'
+		|| datamap->map.map[y / 32][x / 32] == 'N')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'C')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
 		return (1);
 	else if (datamap->map.map[y / 32][x / 32] == 'P')
-	{
-		mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-			datamap->enemy.img, x, y);
-		ft_printf("You lose\n");
-		ft_error_free(datamap);
-	}
+		got_a_enemy(datamap, x, y);
 	else if (datamap->map.map[y / 32][x / 32] == '0')
 		return (0);
 	return (0);
-}
-
-int	ft_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-void	ft_1_to_w(t_datamap *datamap, int x, int y)
-{
-	int		i;
-	int		j;
-
-	i = x - 128;
-	j = y - 128;
-	if (j < 0)
-		j = 0;
-	if (i < 0)
-		i = 0;
-	while (y + 128 > j && j / 32 < datamap->map.height)
-	{
-		while (x + 128 > i && i / 32 < datamap->map.width)
-		{
-			if (datamap->map.map[j / 32][i / 32] == '1')
-			{
-				mlx_put_image_to_window(datamap->data.mlx, datamap->data.win,
-					datamap->wall_light.img, i, j);
-				datamap->map.map[j / 32][i / 32] = 'W';
-			}
-			i += 32;
-		}
-		i = x - 128;
-		j += 32;
-	}
 }

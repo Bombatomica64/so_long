@@ -14,8 +14,13 @@
 
 void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 {
-	if (ft_check_block(data, data->player.x + dr_x, data->player.y + dr_y) == 0)
+	int	a;
+
+	a = ft_check_block(data, data->player.x + dr_x, data->player.y + dr_y);
+	if (a == 0)
 	{
+		data->moves_happened = 1;
+		ft_rem_lights(data, data->player.x, data->player.y, 3);
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
 			img, data->player.x + dr_x, data->player.y + dr_y);
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
@@ -32,19 +37,21 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		}
 		ft_flood_light(data, data->player.x - dr_x, data->player.y - dr_y, 3);
 	}
+	else if (a == 1)
+		ft_crash_animation(data, data->player.x, data->player.y);
 }
 
 void	ft_printmoves(t_datamap *datamap)
 {
-	mlx_string_put(datamap->data.mlx, datamap->data.win, 64,
-		datamap->map.height * 32 + 32, 0x000000, datamap->moves_str);
+	mlx_string_put(datamap->data.mlx, datamap->data.win, 20,
+		datamap->map.height * 32 - 10, 0x000000, datamap->moves_str);
 	free(datamap->moves_str);
 	datamap->moves_str = ft_itoa(datamap->moves);
 	if (!datamap->moves_str)
 		return ;
 	datamap->moves_str = ft_strjoin2("Moves done : ", datamap->moves_str);
-	mlx_string_put(datamap->data.mlx, datamap->data.win, 64,
-		datamap->map.height * 32 + 32, 0xFFFFFF, datamap->moves_str);
+	mlx_string_put(datamap->data.mlx, datamap->data.win, 20,
+		datamap->map.height * 32 - 10, 0xFFFFFF, datamap->moves_str);
 }
 
 void	ft_print_map(t_map map)
@@ -62,7 +69,6 @@ void	ft_print_map(t_map map)
 			x++;
 		}
 		ft_printf("\n");
-
 		y++;
 	}
 }
@@ -88,7 +94,6 @@ void	ft_movement_e(t_datamap *data, void *img, int dr_x, int dr_y)
 				data->map.map[data->enemies->y / 32 - dr_y / 32]
 				[data->enemies->x / 32 - dr_x / 32] = '0';
 		}
-		ft_flood_light(data, data->enemies->x - dr_x,
-			data->enemies->y - dr_y, 1);
 	}
+	ft_flood_light_e(data, data->enemies->x, data->enemies->y, 2);
 }

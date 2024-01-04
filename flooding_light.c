@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flooding_light.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:44:25 by lmicheli          #+#    #+#             */
-/*   Updated: 2023/12/27 17:12:25 by lmicheli         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:49:36 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	ft_put_image(t_datamap *data, t_player pos, t_image **imgs, int radius)
 	else if (data->map.map[map_y][map_x] == '1')
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
 			data->wall.img, pos.x, pos.y);
+	else if (data->map.map[map_y][map_x] == 'N')
+		mlx_put_image_to_window(data->data.mlx, data->data.win,
+			data->enemy.img, pos.x, pos.y);
 	else if (data->player.x == pos.x && data->player.y == pos.y)
 		mlx_put_image_to_window(data->data.mlx, data->data.win,
 			data->babbo.img, pos.x, pos.y);
@@ -81,9 +84,23 @@ void	ft_flood_light(t_datamap *data, int x, int y, int radius)
 	imgs[0] = &data->tile25;
 	imgs[1] = &data->tile50;
 	imgs[2] = &data->tile75;
-	ft_rem_lights(data, x, y, radius + 1);
 	player.x = data->player.x;
 	player.y = data->player.y;
 	ft_flooding_light(data, player, imgs, radius);
+	free(imgs);
+}
+
+void	ft_flood_light_e(t_datamap *data, int x, int y, int radius)
+{
+	t_image		**imgs;
+	t_player	enemy;
+
+	imgs = malloc(sizeof(t_image *) * 3);
+	imgs[0] = &data->tile25;
+	imgs[1] = &data->tile50;
+	imgs[2] = &data->tile75;
+	enemy.x = x;
+	enemy.y = y;
+	ft_flooding_light(data, enemy, imgs, radius);
 	free(imgs);
 }
