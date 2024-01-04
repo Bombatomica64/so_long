@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:19:31 by mruggier          #+#    #+#             */
-/*   Updated: 2024/01/03 12:56:07 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:09:53 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	on_keypress(int keysym, t_datamap *datamap)
 	else if (keysym == XK_Escape)
 		ft_error_free(datamap);
 	enemy_move(datamap);
-	ft_flood_light(datamap, datamap->player.x, datamap->player.y, 3);
+	ft_flood_light(datamap, 3);
 	if (datamap->moves_happened == 1)
 	{
 		datamap->moves++;
@@ -37,6 +37,9 @@ int	on_keypress(int keysym, t_datamap *datamap)
 int	on_mouserelease(int button, int x, int y, t_datamap *data)
 {
 	int	i;
+	(void)button;
+	(void)x;
+	(void)y;
 
 	if (data->released == 0)
 	{
@@ -50,7 +53,7 @@ int	on_mouserelease(int button, int x, int y, t_datamap *data)
 		mlx_hook(data->data.win, DestroyNotify, StructureNotifyMask,
 			&on_destroy, data);
 		ft_put_tile(data, data->map);
-		ft_flood_light(data, data->player.x, data->player.y, 3);
+		ft_flood_light(data, 3);
 		mlx_loop(data->data.mlx);
 	}
 	return (0);
@@ -58,6 +61,10 @@ int	on_mouserelease(int button, int x, int y, t_datamap *data)
 
 int	on_mouseclick(int button, int x, int y, t_datamap *data)
 {
+	(void)button;
+	(void)x;
+	(void)y;
+
 	if (data->clicked == 0)
 	{
 		data->clicked = 1;

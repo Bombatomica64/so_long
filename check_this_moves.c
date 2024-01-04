@@ -28,14 +28,14 @@ int	ft_check_block(t_datamap *datamap, int x, int y)
 		return (0);
 	else if (datamap->map.map[y / 32][x / 32] == 'E')
 	{
-		got_a_exit(datamap, x, y);
+		got_a_exit(datamap);
 		datamap->moves_happened = 0;
 		return (1);
 	}
 	return (0);
 }
 
-void	got_a_exit(t_datamap *datamap, int x, int y)
+void	got_a_exit(t_datamap *datamap)
 {
 	if (datamap->map.nb_c == 0)
 	{

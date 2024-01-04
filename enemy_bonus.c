@@ -54,7 +54,7 @@ int	ft_random_number(void)
 	return (rand() % 4 + 1);
 }
 
-void	ft_move_enemy(t_datamap *data, t_enemy *enemy, int dir, void *img)
+void	ft_move_enemy(t_datamap *data, int dir, void *img)
 {
 	if (dir == 1)
 		ft_movement_e(data, img, 0, -32);
@@ -86,7 +86,7 @@ void	enemy_move(t_datamap *data)
 	while (data->enemies)
 	{
 		direction = ft_random_number();
-		ft_move_enemy(data, data->enemies, direction, data->enemy.img);
+		ft_move_enemy(data, direction, data->enemy.img);
 		data->enemies = data->enemies->next;
 	}
 	data->enemies = first_enemy;

@@ -19,6 +19,8 @@ t_player	get_player(t_map map)
 	int			y;
 
 	y = 0;
+	player.x = 0;
+	player.y = 0;
 	while (map.map[y])
 	{
 		x = 0;

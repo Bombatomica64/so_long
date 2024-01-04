@@ -45,7 +45,7 @@ void	ft_remove_light(t_datamap *data, t_enemy *enemy)
 	}
 } */
 
-void	ft_process_columns(t_datamap *data, int x, int y, int offset)
+void	ft_process_columns(t_datamap *data, int x, int offset)
 {
 	int	j;
 
@@ -84,7 +84,7 @@ void	ft_rem_lights(t_datamap *data, int x, int y, int offset)
 			data->i++;
 			continue ;
 		}
-		ft_process_columns(data, x, y, offset);
+		ft_process_columns(data, x, offset);
 		data->i++;
 	}
 }
