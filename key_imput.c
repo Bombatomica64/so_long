@@ -37,10 +37,10 @@ int	on_keypress(int keysym, t_datamap *datamap)
 int	on_mouserelease(int button, int x, int y, t_datamap *data)
 {
 	int	i;
+
 	(void)button;
 	(void)x;
 	(void)y;
-
 	if (data->released == 0)
 	{
 		data->released = 1;
@@ -64,7 +64,6 @@ int	on_mouseclick(int button, int x, int y, t_datamap *data)
 	(void)button;
 	(void)x;
 	(void)y;
-
 	if (data->clicked == 0)
 	{
 		data->clicked = 1;
