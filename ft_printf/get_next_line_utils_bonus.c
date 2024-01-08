@@ -69,6 +69,15 @@ char	*ft_correctline(char *old_str)
 	return (line);
 }
 
+void	ft_freex(char **str)
+{
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+}
+
 char	*ft_resto(char *old_str)
 {
 	int		i;
@@ -91,6 +100,8 @@ char	*ft_resto(char *old_str)
 	while (old_str[i])
 		returnline[j++] = old_str[i++];
 	returnline[j] = '\0';
+	if (returnline[0] == '\0')
+		ft_freex(&returnline);
 	free(old_str);
 	return (returnline);
 }

@@ -6,7 +6,7 @@
 /*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:13:47 by mruggier          #+#    #+#             */
-/*   Updated: 2024/01/03 12:20:19 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:03:20 by mruggier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	ft_1_to_w(t_datamap *data, int x, int y)
 	j = y - 256;
 	if (j < 0)
 		j = 0;
-	if (i < 0)
-		i = 0;
 	while (y + 256 > j && j / 32 < data->map.height)
 	{
+		if (i < 0)
+			i = 0;
 		while (x + 256 > i && i / 32 < data->map.width)
 		{
 			if (data->map.map[j / 32][i / 32] == '1')

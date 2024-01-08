@@ -41,17 +41,30 @@ void	movement_player(t_datamap *data, void *img, int dr_x, int dr_y)
 		ft_crash_animation(data, data->player.x, data->player.y);
 }
 
-void	ft_printmoves(t_datamap *datamap)
+void	ft_printmoves(t_datamap *data)
 {
-	mlx_string_put(datamap->data.mlx, datamap->data.win, 20,
-		datamap->map.height * 32 - 10, 0x000000, datamap->moves_str);
-	free(datamap->moves_str);
-	datamap->moves_str = ft_itoa(datamap->moves);
-	if (!datamap->moves_str)
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < 14)
+	{
+		i = 0;
+		while (i < 110)
+		{
+			mlx_pixel_put(data->data.mlx, data->data.win,
+				15 + i, data->map.height * 32 - 15 + j, 0x000000);
+			i++;
+		}
+		j++;
+	}
+	free(data->moves_str);
+	data->moves_str = ft_itoa(data->moves);
+	if (!data->moves_str)
 		return ;
-	datamap->moves_str = ft_strjoin2("Moves done : ", datamap->moves_str);
-	mlx_string_put(datamap->data.mlx, datamap->data.win, 20,
-		datamap->map.height * 32 - 10, 0xFFFFFF, datamap->moves_str);
+	data->moves_str = ft_strjoin2("Moves done : ", data->moves_str);
+	mlx_string_put(data->data.mlx, data->data.win, 20,
+		data->map.height * 32 - 4, 0xFFFFFF, data->moves_str);
 }
 
 void	ft_print_map(t_map map)

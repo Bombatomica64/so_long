@@ -52,5 +52,5 @@ replay:
 	@rm -f $(NAME)
 	@$(CC) $(SRC) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "Let's  gooo!!"
-
+  
 .PHONY: all clean fclean bonus re replay
