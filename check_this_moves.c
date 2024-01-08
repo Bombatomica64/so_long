@@ -39,8 +39,8 @@ void	got_a_exit(t_datamap *datamap)
 {
 	if (datamap->map.nb_c == 0)
 	{
-		ft_error_free(datamap);
 		ft_printf("You win\n");
+		ft_error_free(datamap);
 	}
 }
 

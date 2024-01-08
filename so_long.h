@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mruggier <mruggier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmicheli <lmicheli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 17:15:22 by lmicheli          #+#    #+#             */
-/*   Updated: 2024/01/04 18:07:56 by mruggier         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:08:27 by lmicheli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int			ft_check_block(t_datamap *datamap, int x, int y);
 int			get_collectibles(t_map map);
 void		ft_move(t_datamap *datamap, int axis, int direction);
 void		ft_first_enemy(t_datamap *data);
-void		ft_move_enemy(t_datamap *datamap, int dir, void *enemy_img);
+void		ft_move_enemy(t_datamap *datamap, int direction, void *enemy_img);
 void		ft_put_light(t_datamap *data, t_enemy *enemy, int direction);
 void		ft_remove_light(t_datamap *data, t_enemy *enemy);
 t_enemy		*get_enemies(t_map map);

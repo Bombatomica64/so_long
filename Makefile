@@ -10,7 +10,7 @@ CC = cc -Wall -Wextra -Werror
 SRC = flood_fill.c  ft_error_free.c  ft_errors.c  \
 	map_check.c put_images.c  read_map.c  so_long.c \
 	bad_next_line.c get_entity.c check_this_moves.c \
-	enemy_bonus.c put_lights.c images.c movements.c key_imput.c \
+	enemy_bonus.c put_lights.c images.c movements.c key_input.c \
 	flooding_light.c frees.c check_moves2.c animations_bonus.c
 
 
@@ -52,5 +52,5 @@ replay:
 	@rm -f $(NAME)
 	@$(CC) $(SRC) ft_printf/libftprintf.a $(MLX) $(MLXFLAGS) -o $(NAME)
 	@echo "Let's  gooo!!"
-
+  
 .PHONY: all clean fclean bonus re replay
